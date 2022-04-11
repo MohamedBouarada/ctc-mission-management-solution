@@ -1,0 +1,26 @@
+.button {
+  display: grid;
+  float: left;
+  border: 1px solid #250b63;
+  background: #0e3783;
+  color: white;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:active {
+  background: #2f2d35;
+  border-color: #6e6c75;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.card {
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: white;
+}
