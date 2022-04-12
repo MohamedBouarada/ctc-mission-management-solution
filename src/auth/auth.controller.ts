@@ -1,4 +1,5 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { CreateOrganismDto } from 'src/organism/dto/create-organism.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { SigninDto } from './dto/singin.dto';
@@ -15,5 +16,11 @@ export class AuthController {
     @Post('singin')
     singin(signinDto:SigninDto): any{
         
+    }
+
+
+    @Post('/organism/signup')
+    organismSignup(@Body() createOrganismDto: CreateOrganismDto){
+        return this.authService.organismSignup(createOrganismDto);
     }
 }

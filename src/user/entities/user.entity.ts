@@ -1,6 +1,7 @@
 import { IsEmail, MinLength } from "class-validator";
 import { Timestamp } from "src/generics/timestamp.entity";
-import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Organism } from "src/organism/entities/organism.entity";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import { RolesEnum } from "../enums/roles.enum";
 
 @Entity()
@@ -41,5 +42,8 @@ export class User extends Timestamp{
     @Column()
     @MinLength(10)
     password:string;
+
+    @OneToOne(type=>Organism,organism=>organism.contactPerson,{})
+    organism:Organism;
 
 }
