@@ -16,6 +16,8 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { ButtonComponent } from './shared/button/button.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { SignupUserComponent } from './pages/signup-user/signup-user.component';
+import { SignupOrganismComponent } from './pages/signup-organism/signup-organism.component';
 
 
 registerLocaleData(en);
@@ -24,7 +26,9 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     LoginComponent,
-    ButtonComponent
+    ButtonComponent,
+    SignupUserComponent,
+    SignupOrganismComponent
   ],
   imports: [
     BrowserModule,
