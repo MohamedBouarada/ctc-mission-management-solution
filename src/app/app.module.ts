@@ -8,6 +8,7 @@ import { PlanningComponent } from './componnents/planning/planning.component';
 import { FormationComponent } from './componnents/formation/formation.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { CardComponent } from './shared/card/card.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -16,12 +17,12 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [AppComponent, PlanningComponent, FormationComponent],
+  declarations: [AppComponent, PlanningComponent, FormationComponent, CardComponent],
   imports: [
     BrowserModule,
     FullCalendarModule, // register FullCalendar with you app
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
