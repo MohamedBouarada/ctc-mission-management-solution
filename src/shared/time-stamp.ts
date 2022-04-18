@@ -2,9 +2,9 @@ import { CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from "typeorm";
 
 export class timeStamp{
     @CreateDateColumn({update:false})
-    CreatedAt:Date;
+    createdAt:Date;
     @UpdateDateColumn()
-    UpdatedAt:Date;
+    updatedAt:Date;
     @DeleteDateColumn()
-    DeletedAt:Date;
+    deletedAt:Date;
 }
