@@ -1,0 +1,7 @@
+.login-form-button {
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    background-color:#ffae00;
+    border-color: #ffae00;
+  }
