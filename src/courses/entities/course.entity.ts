@@ -6,33 +6,35 @@ import { dummyManager } from "./dummyManger.entity";
 @Entity()
 export class Course extends timeStamp {
     @PrimaryGeneratedColumn('increment')
-     Id: number;
+     id: number;
     @Column()
-     Name: string;
+     name: string;
     @Column()
-     Date: string;
+     startDate: Date;
     @Column()
-     Adresse: string;
+    endDate :Date ;
     @Column()
-     Description: string;
+     address: string;
+    @Column()
+     description: string;
     @Column({ type:'decimal', precision: 10, scale: 2 })    
-     Price: number;
+     price: number;
     @Column()
-     Capacity: number;
+     capacity: number;
     @JoinColumn()
     @ManyToOne(type=>dummyInstructor,{         //options to review
        eager:true,
        cascade:['update','insert'],
        nullable:true
     })
-    InstructedBy:dummyInstructor
+    instructedBy:dummyInstructor
     @JoinColumn()
     @ManyToOne(type=>dummyManager,{       //options to review
         eager:true,
         cascade:['update','insert'],
         nullable:true
      })
-     PlannifiedBy:dummyManager
+     plannedBy:dummyManager
 
  
 }
