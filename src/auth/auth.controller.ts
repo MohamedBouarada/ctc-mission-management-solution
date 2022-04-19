@@ -6,21 +6,18 @@ import { SigninDto } from './dto/singin.dto';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService:AuthService){}
+  constructor(private authService: AuthService) {}
 
-    @Post('signup')
-    signup(@Body() createUserDto : CreateUserDto): any{
-        return this.authService.signup(createUserDto);
-    }
+  @Post('signup')
+  signup(@Body() createUserDto: CreateUserDto): any {
+    return this.authService.signup(createUserDto);
+  }
 
-    @Post('singin')
-    singin(signinDto:SigninDto): any{
-        
-    }
+  @Post('singin')
+  singin(signinDto: SigninDto): any {}
 
-
-    @Post('/organism/signup')
-    organismSignup(@Body() createOrganismDto: CreateOrganismDto){
-        return this.authService.organismSignup(createOrganismDto);
-    }
+  @Post('/organism/signup')
+  organismSignup(@Body() createOrganismDto: CreateOrganismDto) {
+    return this.authService.organismSignup(createOrganismDto);
+  }
 }
