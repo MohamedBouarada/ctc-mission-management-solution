@@ -1,3 +1,7 @@
 export enum RolesEnum {
-    INDIVIDUAL = 'individual'
+  INDIVIDUAL = 'individual',
+  INSTRUCTOR = 'instructor',
+  INSTRUCTOR_REQUEST = 'instructor-request',
+  ADMIN = 'admin',
+  ORGANISM_CONTACT = 'organism-contact',
 }

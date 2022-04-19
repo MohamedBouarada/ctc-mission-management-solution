@@ -1,17 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { OrganismService } from './organism.service';
 import { CreateOrganismDto } from './dto/create-organism.dto';
 import { UpdateOrganismDto } from './dto/update-organism.dto';
+import { FindOrganismDto } from './dto/find-organism.dto';
 
 @Controller('organism')
 export class OrganismController {
   constructor(private readonly organismService: OrganismService) {}
 
-  
-
+  @Post()
+  addOrganism(@Body() createOrganismDto: CreateOrganismDto) {
+    return this.organismService.create(createOrganismDto);
+  }
   @Get()
-  findAll() {
-    return this.organismService.findAll();
+  findAll(@Query() findOptions: FindOrganismDto) {
+    return this.organismService.findAllSortedAndPaginated(findOptions);
   }
 
   @Get(':id')
@@ -20,7 +32,10 @@ export class OrganismController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrganismDto: UpdateOrganismDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateOrganismDto: UpdateOrganismDto,
+  ) {
     return this.organismService.update(+id, updateOrganismDto);
   }
 

@@ -1,38 +1,51 @@
-import { Type } from "class-transformer";
-import { IsEnum, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString } from "class-validator";
-import { User } from "src/user/entities/user.entity";
-import { OneToOne } from "typeorm";
-import { OrganismNautreEnum } from "../enums/organism-nature.enum";
+import { Type } from 'class-transformer';
+import {
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsNumberString,
+  IsOptional,
+  IsPositive,
+  IsString,
+} from 'class-validator';
+
+import { OrganismNautreEnum } from '../enums/organism-nature.enum';
+import { User } from '../../user/entities/user.entity';
 
 export class CreateOrganismDto {
-    @IsNotEmpty()
-    @IsString()
-    name:string;
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 
-    @IsNotEmpty()
-    activity:string;
+  @IsNotEmpty()
+  activity: string;
 
-    @IsNotEmpty()
-    @IsNumberString()
-    taxRegistrationNumber:string;
+  @IsNotEmpty()
+  @IsNumberString()
+  taxRegistrationNumber: string;
 
-    @IsNotEmpty()
-    contactPersonPosition:string;
+  @IsNotEmpty()
+  contactPersonPosition: string;
 
-    @IsNotEmpty()
-    @IsEnum(OrganismNautreEnum)
-    nature:OrganismNautreEnum;
+  @IsNotEmpty()
+  @IsEnum(OrganismNautreEnum)
+  nature: OrganismNautreEnum;
 
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @IsInt()
+  @IsPositive()
+  numberOfEmployees: number;
 
-    @IsOptional()
-    @Type(() => Number)
-    @IsNumber()
-    numberOfEmplyees:number;
+  @IsOptional()
+  subsidiary: string;
 
-    @IsOptional()
-    subsidiary:string;
+  @IsOptional()
+  trainingNeeds: string;
 
-    @IsOptional()
-    trainingNeeds:string;
-
+  @Type(() => Number)
+  @IsNumber()
+  contactPerson: User;
 }
