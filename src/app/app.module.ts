@@ -1,8 +1,12 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { AppComponent } from './app.component';
+import { PlanningComponent } from './componnents/planning/planning.component';
+import { FormationComponent } from './componnents/formation/formation.component';
+import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './pages/login/login.component';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -19,6 +23,11 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SignupUserComponent } from './pages/signup-user/signup-user.component';
 import { SignupOrganismComponent } from './pages/signup-organism/signup-organism.component';
 
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
 
 registerLocaleData(en);
 
@@ -28,7 +37,9 @@ registerLocaleData(en);
     LoginComponent,
     ButtonComponent,
     SignupUserComponent,
-    SignupOrganismComponent
+    SignupOrganismComponent,
+    PlanningComponent,
+    FormationComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +51,10 @@ registerLocaleData(en);
     IconsProviderModule,
     NgZoroModule,
     NzLayoutModule,
-    NzMenuModule
+    NzMenuModule,
+    FullCalendarModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
