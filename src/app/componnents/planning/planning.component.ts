@@ -10,6 +10,7 @@ import { event } from 'src/app/models/event.model';
 })
 export class PlanningComponent implements OnInit {
   @ViewChild('calendar', { static: true }) calendar!: FullCalendarComponent;
+  isCalendarViewContext: boolean;
   events: event[] = [
     {
       title: 'Formation Html ',
@@ -40,6 +41,12 @@ export class PlanningComponent implements OnInit {
     events: this.events,
   };
 
+  constructor() {
+    this.isCalendarViewContext = true;
+  }
+
+  ngOnInit(): void {}
+
   handleEventClick(arg: any) {
     arg.jsEvent.preventDefault(); // don't let the browser navigate
 
@@ -62,6 +69,8 @@ export class PlanningComponent implements OnInit {
     };
     this.addEvent(event);
   }
-  constructor() {}
-  ngOnInit(): void {}
+
+  swapView() {
+    this.isCalendarViewContext = !this.isCalendarViewContext;
+  }
 }
