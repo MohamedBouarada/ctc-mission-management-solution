@@ -50,7 +50,7 @@ export class CoursesService {
   }
 
   async findOne(id: number): Promise<Course> {
-    const courseExists = await this.courseRepository.findOne({ id });
+    const courseExists = await this.courseRepository.findOne({where :{ id }});
     if (courseExists) {
       return courseExists;
     }
