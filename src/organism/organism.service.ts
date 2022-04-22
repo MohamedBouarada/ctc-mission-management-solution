@@ -46,7 +46,7 @@ export class OrganismService {
   }
 
   async findOne(id: number) {
-    return this.organismRepository.findOne({where : {id}});
+    return this.organismRepository.findOne(id);
   }
 
   async update(id: number, updateOrganismDto: UpdateOrganismDto) {
