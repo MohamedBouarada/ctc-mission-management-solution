@@ -62,9 +62,10 @@ export class PlanningComponent implements OnInit {
   }
 
   handleAddClick() {
+    window.open('http://localhost:4200/AddEventForm');
     const event: event = {
       title: 'test',
-      date: '2022-04-18',
+      date: '2022-04-28',
       url: 'google.com',
     };
     this.addEvent(event);

@@ -1,0 +1,53 @@
+.bg {
+  background-color: rgb(216, 216, 216);
+}
+.container {
+  display: grid;
+  justify-content: center;
+  grid-gap: 4rem;
+  padding: 0 2rem;
+}
+.logo {
+  margin-top: 70px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.AddCourse-form {
+  width: 100%;
+  padding-top: 10%;
+  padding-bottom: 30px;
+  padding-left: 100px;
+  padding-right: 100px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border-radius: 0.75rem;
+}
+
+.container a {
+  color: #ffae00;
+}
+
+.AddCourse-form__header {
+  margin-bottom: 15px;
+  position: relative;
+  color: #333333;
+}
+
+.AddCourse-form_bottom {
+  text-align: center;
+}
+
+.AddCourse-form-margin {
+  margin-bottom: 14px;
+}
+
+@media (max-width: 495px) {
+  .AddCourse-form {
+    margin-top: -35px;
+  }
+}
