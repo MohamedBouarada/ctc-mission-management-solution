@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { findInstanceDto } from 'src/shared/find-instance.dto';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
-import { FindCourseDto } from './dto/find-course.dto';
 
 @Injectable()
 export class CoursesService {
@@ -25,7 +25,7 @@ export class CoursesService {
       skip: offset,
     });
   }
-  async findAllSortedAndPaginated(findOptions: FindCourseDto) {
+  async findAllSortedAndPaginated(findOptions: findInstanceDto) {
     const queryBuilder = this.courseRepository.createQueryBuilder('course');
     const orderBy = findOptions.orderBy ? findOptions.orderBy : 'createdAt';
     const sort = findOptions.sort
