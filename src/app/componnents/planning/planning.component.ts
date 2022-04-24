@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular'; // useful for typechecking
 import * as arg from 'arg';
 import { event } from 'src/app/models/event.model';
-
+import timeGridPlugin from '@fullcalendar/timegrid';
+import dayGridPlugin from '@fullcalendar/daygrid';
 @Component({
   selector: 'app-planning',
   templateUrl: './planning.component.html',
@@ -11,34 +12,14 @@ import { event } from 'src/app/models/event.model';
 export class PlanningComponent implements OnInit {
   @ViewChild('calendar', { static: true }) calendar!: FullCalendarComponent;
   isCalendarViewContext: boolean;
-  events: event[] = [
-    {
-      title: 'Formation Html ',
-      date: '2022-04-09',
-      url: 'http://google.com/',
-    },
-    {
-      title: 'Formation CSS ',
-      date: '2022-04-16',
-      url: 'http://google.com/',
-    },
-    {
-      title: 'Formation Javascript ',
-      date: '2022-04-18',
-      url: 'http://google.com/',
-      display: 'background',
-    },
-    {
-      title: 'Formation Express ',
-      date: '2022-04-22',
-      url: 'http://google.com/',
-    },
-  ];
+ // events:
 
   calendarOptions: CalendarOptions = {
+    headerToolbar: { center: 'dayGridMonth,timeGridWeek,timeGridDay' },
+    plugins : [timeGridPlugin],
     initialView: 'dayGridMonth',
     eventClick: this.handleEventClick.bind(this), // bind is important!
-    events: this.events,
+    events: "http://localhost:3000/courses/calendar/event",
   };
 
   constructor() {
@@ -56,10 +37,13 @@ export class PlanningComponent implements OnInit {
     }
   }
 
+  /*
   addEvent(event: event) {
     this.events.push(event);
     this.calendar.getApi().addEvent(event);
   }
+
+   */
 
   handleAddClick() {
     window.open('http://localhost:4200/AddEventForm');
@@ -68,7 +52,7 @@ export class PlanningComponent implements OnInit {
       date: '2022-04-28',
       url: 'google.com',
     };
-    this.addEvent(event);
+   // this.addEvent(event);
   }
 
   swapView() {
