@@ -1,10 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { FormationComponent } from './componnents/formation/formation.component';
+import { PlanningComponent } from './componnents/planning/planning.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupOrganismComponent } from './pages/signup-organism/signup-organism.component';
+import { SignupUserComponent } from './pages/signup-user/signup-user.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/login' },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup-user', component: SignupUserComponent },
+  { path: 'signup-organism', component: SignupOrganismComponent },
+  { path: 'planning', component: PlanningComponent },
+  { path: 'AddEventForm', component: FormationComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

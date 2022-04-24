@@ -1,0 +1,23 @@
+<div class="background">
+  <div class="view-change">
+    <button class="button mt-2 ms-1" (click)="swapView()" *ngIf="isCalendarViewContext">Card View</button>
+    <button class="button mt-2 ms-1" (click)="swapView()" *ngIf="!isCalendarViewContext">Calendar View</button>
+  </div>
+  <div class="calendar-container" *ngIf="isCalendarViewContext">
+    <div class="card mt-5 mx-5">
+      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    </div>
+    <button class="button mt-2 ms-5" (click)="handleAddClick()">
+      Ajouter formation
+    </button>
+    <button class="button mt-2 ms-1">supprimer formation</button>
+  </div>
+  <div class="card-container" *ngIf="!isCalendarViewContext">
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+  </div>
+</div>
