@@ -131,8 +131,10 @@
             <div nz-row class="login-form-margin"></div>
             <br>
           <app-button *ngIf="!isUserSubscription" type="button"  (click)="showUserSubscription(true)" [text]="textl"></app-button>
+         <br>
           <app-button *ngIf="isUserSubscription" type="button"  (click)="showUserSubscription(false)" [text]="text3"></app-button>
             <br>
+          <div nz-row class="login-form-margin"></div>
           <app-button *ngIf="isUserSubscription" [text]="text2"></app-button>
             <div class="login-form_bottom">
                 already have an account ?
