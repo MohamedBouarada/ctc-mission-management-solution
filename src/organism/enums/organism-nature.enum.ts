@@ -1,6 +1,6 @@
 export enum OrganismNautreEnum{
     ASSOCIATION = 'association',
     ADMINISTRATION = 'administration',
-    UNIVERSITY = 'universite',
+    UNIVERSITY = 'university',
     COMPANY = 'entreprise'
 }

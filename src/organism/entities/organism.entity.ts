@@ -53,6 +53,7 @@ export class Organism {
 
   @OneToOne(() => User, (user) => user.organism, {
     eager: true,
+    cascade : ["insert"]
   })
   @JoinColumn()
   contactPerson: User;
