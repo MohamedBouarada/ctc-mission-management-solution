@@ -25,7 +25,7 @@
             <input
               type="text"
               nz-input
-              formControlName="CourseName"
+              formControlName="name"
               placeholder="Course name"
             />
           </nz-input-group>
@@ -35,9 +35,9 @@
         <nz-form-control nzErrorTip="Please enter the start date ">
           <nz-input-group>
             <input
-              type="date"
+              type="datetime-local"
               nz-input
-              formControlName="StartDate"
+              formControlName="startDate"
               placeholder="start date "
             />
           </nz-input-group>
@@ -47,9 +47,9 @@
         <nz-form-control nzErrorTip="Please enter the end date ">
           <nz-input-group>
             <input
-              type="date"
+              type="datetime-local"
               nz-input
-              formControlName="EndDate"
+              formControlName="endDate"
               placeholder="end date "
             />
           </nz-input-group>
@@ -61,7 +61,7 @@
             <input
               type="text"
               nz-input
-              formControlName="Address"
+              formControlName="address"
               placeholder="address"
             />
           </nz-input-group>
@@ -73,7 +73,7 @@
             <input
               type="text"
               nz-input
-              formControlName="Price"
+              formControlName="price"
               placeholder="price "
             />
           </nz-input-group>
@@ -86,9 +86,20 @@
             <input
               type="text"
               nz-input
-              formControlName="Capacity"
+              formControlName="capacity"
               placeholder="capacity "
             />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the Course description">
+          <nz-input-group>
+            <textarea
+              type="text"
+              nz-input
+              formControlName="description"
+              placeholder=" description"></textarea>
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>

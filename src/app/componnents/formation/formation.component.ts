@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-formation',
@@ -13,6 +14,14 @@ export class FormationComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+      const dummyCourse = {
+        ...this.validateForm.value,
+        instructedBy:"1",
+        plannedBy:"1"
+      }
+      this.http.post('http://localhost:3000/courses/',dummyCourse).subscribe(
+        responseData=>{console.log(responseData);}
+      );
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -27,16 +36,17 @@ export class FormationComponent implements OnInit {
     console.log('submit', this.validateForm.value);
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private http:HttpClient) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      CourseName: [null, [Validators.required]],
-      StartDate: [null, [Validators.required]],
-      EndDate: [null, [Validators.required]],
-      Address: [null, [Validators.required]],
-      Price: [null, [Validators.required]],
-      Capacity: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      startDate: [null, [Validators.required]],
+      endDate: [null, [Validators.required]],
+      address: [null, [Validators.required]],
+      price: [null, [Validators.required]],
+      capacity: [null, [Validators.required]],
+      description : [null, [Validators.required]]
     });
   }
 }

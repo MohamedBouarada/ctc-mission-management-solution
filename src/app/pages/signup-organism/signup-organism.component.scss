@@ -1,12 +1,14 @@
-body{
+.bg{
     background-color: rgb(216, 216, 216);
 }
 .container{
-  
+
   display:grid;
   justify-content: center;
   grid-gap: 4rem;
   padding: 0 2rem;
+
+
 }
 .logo{
     margin-top: 70px;
@@ -25,8 +27,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: #ffffff;   
-    border-radius: 0.75rem;   
+    background: #ffffff;
+    border-radius: 0.75rem;
 }
 
 .container a{
@@ -49,10 +51,10 @@ body{
 
 
 
- 
+
 
 @media(max-width:495px) {
-     
+
   .login-form{
     margin-top:-35px;
   }
