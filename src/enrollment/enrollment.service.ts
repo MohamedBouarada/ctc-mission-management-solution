@@ -49,7 +49,7 @@ export class EnrollmentService {
   }
 
   async findOne(id: number): Promise<Enrollment> {
-    const enrollmentExists = await this.enrollmentRepository.findOne( id );
+    const enrollmentExists = await this.enrollmentRepository.findOne( {where :{id}} );
     if (enrollmentExists) {
       return enrollmentExists;
     }
