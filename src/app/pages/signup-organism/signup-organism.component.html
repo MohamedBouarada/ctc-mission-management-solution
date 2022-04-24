@@ -5,13 +5,13 @@
         height="100px"
         nzSrc="/assets/Images/medsirat.png"
         alt=""
-        class="logo"/> 
+        class="logo"/>
         <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-              
+
             <div class="login-form__header"><h1>Signup as an organism</h1>
             Please fill the form to make an account for your organism
             </div>
-
+<div *ngIf="!isUserSubscription">
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your name!">
                 <nz-input-group >
@@ -26,21 +26,114 @@
                 </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
+
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your nature!">
                     <nz-select
                         id="nature"
                         formControlName="nature"
                         nzPlaceHolder="nature">
-                        <nz-option nzValue="male" nzLabel="male"></nz-option>
-                        <nz-option nzValue="female" nzLabel="female"></nz-option>
+                        <nz-option nzValue="association" nzLabel="association"></nz-option>
+                        <nz-option nzValue="university" nzLabel="university"></nz-option>
+                      <nz-option nzValue="administration" nzLabel="administration"></nz-option>
                     </nz-select>
                 </nz-form-control>
             </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your tex registration number!">
+              <nz-input-group >
+                <input type="text" nz-input formControlName="taxRegistrationNumber" placeholder="Tax Registration Number"  />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your position!">
+              <nz-input-group >
+                <input type="text" nz-input formControlName="contactPersonPosition" placeholder="position of the contact person"  />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input  number of employees!">
+              <nz-input-group >
+                <input type="text" nz-input formControlName="numberOfEmployees" placeholder=" number of employees (optional)"  />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input  subsidiary!">
+              <nz-input-group >
+                <input type="text" nz-input formControlName="subsidiary" placeholder=" subsidiary (optional)"  />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input training needs!">
+              <nz-input-group >
+                <input type="text" nz-input formControlName="trainingNeeds" placeholder=" trainingNeeds (optional)"  />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+</div>
+
+          <div *ngIf="isUserSubscription">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your first name!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="firstName" placeholder="First name" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your last name!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="lastName" placeholder="last name" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your Email!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="email" placeholder="Email" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your phone number!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="phoneNumber" placeholder="Telephone" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your CIN!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="cin" placeholder="CIN" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-input-group>
+                  <input type="password" nz-input formControlName="password" placeholder="password" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Password does not match!">
+                <nz-input-group>
+                  <input type="password" nz-input formControlName="cpassword" placeholder="confirm password" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
             <div nz-row class="login-form-margin"></div>
             <br>
-            <app-button routerLink="/signup-user" [text]="textl"></app-button> 
+          <app-button *ngIf="!isUserSubscription" type="button"  (click)="showUserSubscription(true)" [text]="textl"></app-button>
+          <app-button *ngIf="isUserSubscription" type="button"  (click)="showUserSubscription(false)" [text]="text3"></app-button>
             <br>
+          <app-button *ngIf="isUserSubscription" [text]="text2"></app-button>
             <div class="login-form_bottom">
                 already have an account ?
                 <a routerLink="/login">log in here</a>
