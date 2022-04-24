@@ -15,6 +15,11 @@ export class CoursesService {
   async create(createCourseDto: CreateCourseDto): Promise<Course> {
     return await this.courseRepository.save(createCourseDto);
   }
+  async getCoursesInCalendarEventForm() {
+    return await this.courseRepository.find({
+      select: ['startDate', 'endDate', 'name', 'id'],
+    });
+  }
 
   async findAll(): Promise<Course[]> {
     return await this.courseRepository.find();
