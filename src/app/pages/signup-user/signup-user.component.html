@@ -1,70 +1,74 @@
 <div class="bg">
     <div class="container">
-        <img nz-image
-        width="200px"
-        height="100px"
-        nzSrc="/assets/Images/medsirat.png"
-        alt=""
-        class="logo"/> 
+        <img nz-image width="200px" height="100px" nzSrc="/assets/Images/medsirat.png" alt="" class="logo" />
         <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-              
-            <div class="login-form__header"><h1>Signup</h1>
-            Please fill the form to make an account
+
+            <div class="login-form__header">
+                <h1>Signup</h1>
+                Please fill the form to make an account
             </div>
 
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your first name!">
-                <nz-input-group >
-                    <input type="text" nz-input formControlName="firstName" placeholder="First name"  />
-                </nz-input-group>
+                    <nz-input-group>
+                        <input type="text" nz-input formControlName="firstName" placeholder="First name" />
+                    </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your last name!">
-                <nz-input-group >
-                    <input type="text" nz-input formControlName="lastName" placeholder="last name"  />
-                </nz-input-group>
+                    <nz-input-group>
+                        <input type="text" nz-input formControlName="lastName" placeholder="last name" />
+                    </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your Email!">
-                <nz-input-group >
-                    <input type="text" nz-input formControlName="email" placeholder="Email"  />
-                </nz-input-group>
+                    <nz-input-group>
+                        <input type="text" nz-input formControlName="email" placeholder="Email" />
+                    </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your phone number!">
-                <nz-input-group >
-                    <input type="text" nz-input formControlName="telephone" placeholder="Telephone"  />
-                </nz-input-group>
+                    <nz-input-group>
+                        <input type="text" nz-input formControlName="phoneNumber" placeholder="Telephone" />
+                    </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your CIN!">
-                <nz-input-group >
-                    <input type="text" nz-input formControlName="cin" placeholder="CIN"  />
-                </nz-input-group>
+                    <nz-input-group>
+                        <input type="text" nz-input formControlName="cin" placeholder="CIN" />
+                    </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control nzErrorTip="Please input your Password!">
-                <nz-input-group >
-                    <input type="password" nz-input formControlName="password" placeholder="password" />
-                </nz-input-group>
+                    <nz-input-group>
+                        <input type="password" nz-input formControlName="password" placeholder="password" />
+                    </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control nzErrorTip="Password does not match!">
-                    <nz-input-group >
-                    <input type="password" nz-input formControlName="cpassword" placeholder="confirm password" />
+                    <nz-input-group>
+                        <input type="password" nz-input formControlName="cpassword" placeholder="confirm password" />
                     </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <div nz-row class="login-form-margin"></div>
             <br>
-            <app-button [text]="textl"></app-button> 
+            <app-button [text]="textl"></app-button>
             <br>
+            <div *ngIf="successMessage">
+                <nz-alert nzType="success" nzMessage="Sign Up successfully completed"></nz-alert>
+            </div>
+            <div *ngIf="errorMessage">
+                <div *ngFor="let e of errorMessage">
+                    <nz-alert nzType="error" nzMessage="{{e}}"></nz-alert>
+                </div>
+            </div>
             <div class="login-form_bottom">
                 already have an account ?
                 <a routerLink="/login">log in here</a>
