@@ -10,7 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SignupUserComponent implements OnInit {
   validateForm!: FormGroup;
   textl:string="signup";
-  
+  successMessage=false;
+  errorMessage!:string[];
   constructor(private fb: FormBuilder,private http:HttpClient) {}
 
 
@@ -18,7 +19,14 @@ export class SignupUserComponent implements OnInit {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       this.http.post('http://localhost:3000/auth/signup',{...this.validateForm.value}).subscribe(
-        responseData=>{console.log(responseData);}
+        responseData=>{
+          console.log(responseData);
+          this.successMessage=true;
+        },
+        error=>{
+          console.log(error);
+          this.errorMessage=error.error.message;
+          console.log(this.errorMessage);}
       );
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
