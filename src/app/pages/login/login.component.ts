@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
@@ -9,9 +10,14 @@ export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
   textl:string="login";
 
-  submitForm(): void {
+  constructor(private fb: FormBuilder,private http:HttpClient) {}
+
+   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+      this.http.get('http://localhost:3000/courses').subscribe(
+        responseData=>{console.log(responseData);}
+      );
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -22,7 +28,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

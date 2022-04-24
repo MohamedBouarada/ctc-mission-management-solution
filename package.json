@@ -23,6 +23,7 @@
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/resource-timeline": "^5.11.0",
     "arg": "^5.0.1",
+    "cors": "^2.8.5",
     "ng": "^0.0.0",
     "ng-zorro-antd": "^13.1.1",
     "rxjs": "~7.5.0",
