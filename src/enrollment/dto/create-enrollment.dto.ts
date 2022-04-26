@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsEnum, IsNotEmpty, IsNumber, IsPositive } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPositive } from "class-validator";
 import { Course } from "src/courses/entities/course.entity";
 import { timeStamp } from "src/shared/time-stamp";
 import { User } from "src/user/entities/user.entity";
@@ -21,13 +21,13 @@ export class CreateEnrollmentDto extends timeStamp{
     @IsNotEmpty()
     @IsEnum(userTypesEnum) 
     userType:userTypesEnum
-    @IsNotEmpty()
+    @IsOptional()
     @Type(() => Number)
     @IsNumber()
     @IsPositive()
      size:number;
-    @IsNotEmpty()
-     extraInformations:string;
+    @IsOptional()
+     extraInformations:{fullName :string, email: string}[];
 
 
 }
