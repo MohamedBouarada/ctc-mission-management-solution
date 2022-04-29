@@ -23,6 +23,14 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SignupUserComponent } from './pages/signup-user/signup-user.component';
 import { SignupOrganismComponent } from './pages/signup-organism/signup-organism.component';
 import { CardComponent } from './shared/card/card.component';
+import { SignupInstructorComponent } from './pages/signup-instructor/signup-instructor.component';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatChipsModule} from '@angular/material/chips'; 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ProfileUpdateComponent } from './pages/profile-update/profile-update.component';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -39,6 +47,8 @@ registerLocaleData(en);
     ButtonComponent,
     SignupUserComponent,
     SignupOrganismComponent,
+    SignupInstructorComponent,
+    ProfileUpdateComponent,
     PlanningComponent,
     FormationComponent,
     CardComponent
@@ -57,6 +67,12 @@ registerLocaleData(en);
     FullCalendarModule,
     BrowserModule,
     HttpClientModule,
+    MatSliderModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    NzDatePickerModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
