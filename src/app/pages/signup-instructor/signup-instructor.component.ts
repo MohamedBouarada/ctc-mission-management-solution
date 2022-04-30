@@ -53,17 +53,7 @@ export class SignupInstructorComponent implements OnInit {
     
   }
   submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-      
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
+    
   }
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -76,5 +66,6 @@ export class SignupInstructorComponent implements OnInit {
       cpassword: [null, [Validators.required]],
     });
   }
+  
 
 }
