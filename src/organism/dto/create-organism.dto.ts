@@ -7,11 +7,12 @@ import {
   IsNumberString,
   IsOptional,
   IsPositive,
-  IsString,
-} from 'class-validator';
+  IsString, ValidateNested
+} from "class-validator";
 
 import { OrganismNautreEnum } from '../enums/organism-nature.enum';
 import { User } from '../../user/entities/user.entity';
+import { CreateUserDto } from "../../user/dto/create-user.dto";
 
 export class CreateOrganismDto {
   @IsNotEmpty()
@@ -45,7 +46,8 @@ export class CreateOrganismDto {
   @IsOptional()
   trainingNeeds: string;
 
-  @Type(() => Number)
-  @IsNumber()
+  @Type(() => CreateUserDto)
+  @ValidateNested()
+  //@IsNumber()
   contactPerson: User;
 }

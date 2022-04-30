@@ -23,6 +23,20 @@ export class CoursesController {
   async create(@Body() createCourseDto: CreateCourseDto): Promise<Course> {
     return await this.coursesService.create(createCourseDto);
   }
+  @Get('/calendar/event')
+  async getAllForCalender() {
+    const courses = await this.coursesService.getCoursesInCalendarEventForm();
+    const events = courses.map((element) => {
+      return {
+        id: element.id,
+        start: element.startDate,
+        end: element.endDate,
+        url: `/dummyUrl/${element.id}`,
+        title : element.name,
+      };
+    });
+    return events ;
+  }
 
   @Get()
   async findAll(@Query() findOptions: findInstanceDto) {
