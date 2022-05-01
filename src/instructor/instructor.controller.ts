@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Query, Res } from '@nestjs/common';
 import { InstructorService } from './instructor.service';
 import { CreateInstructorDto } from './dto/create-instructor.dto';
 import { UpdateInstructorDto } from './dto/update-instructor.dto';
@@ -34,6 +34,11 @@ export class InstructorController {
   findOne(@Param('id') id: string) {
     return this.instructorService.findOne(+id);
   }
+
+  @Get('/cv/:file')
+    seeUploadedFile(@Param('file') file,@Res() res) {
+      return res.sendFile(file, { root: './uploads' });
+    }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateInstructorDto: UpdateInstructorDto) {
