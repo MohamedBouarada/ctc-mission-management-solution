@@ -1,5 +1,6 @@
 import { IsEmail, MinLength } from 'class-validator';
 import { Timestamp } from 'src/generics/timestamp.entity';
+import { Instructor } from 'src/instructor/entities/instructor.entity';
 import { Organism } from 'src/organism/entities/organism.entity';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { RolesEnum } from '../enums/roles.enum';
@@ -45,4 +46,7 @@ export class User extends Timestamp {
 
   @OneToOne(() => Organism, (organism) => organism.contactPerson)
   organism: Organism;
+
+  @OneToOne(() => Instructor, (organism) => organism.user)
+  instructor: Instructor;
 }
