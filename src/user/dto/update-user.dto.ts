@@ -1,11 +1,14 @@
-import { OmitType, PartialType, PickType } from "@nestjs/mapped-types";
-import { IsNotEmpty } from "class-validator";
-import { CreateUserDto } from "./create-user.dto";
+import { OmitType, PartialType, PickType } from '@nestjs/mapped-types';
+import { IsNotEmpty } from 'class-validator';
+import { CreateUserDto } from './create-user.dto';
 
-class UpdateUserDtoAll extends PartialType(CreateUserDto){}
+class UpdateUserDtoAll extends PartialType(CreateUserDto) {}
 
-export class UpdateUserDto extends OmitType(UpdateUserDtoAll,['cin']){
-    @IsNotEmpty()
-    confirmationPassword: string;
-    
+export class UpdateUserDto extends OmitType(UpdateUserDtoAll, [
+  'cin',
+  'repeat_password',
+  'password'
+]) {
+  @IsNotEmpty()
+  confirmationPassword: string;
 }
