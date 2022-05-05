@@ -1,25 +1,38 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateInstructorDto } from './dto/create-instructor.dto';
 import { FindInstructorDto } from './dto/find-instructor.dto';
 import { UpdateInstructorDto } from './dto/update-instructor.dto';
 import { Instructor } from './entities/instructor.entity';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class InstructorService {
   constructor(
-    @InjectRepository(Instructor) private instructorRepository: Repository<Instructor>,
-  ){}
+    @InjectRepository(Instructor)
+    private instructorRepository: Repository<Instructor>,
+  ) {}
 
-  async create(createInstructorDto: CreateInstructorDto , cv : string) {
+  async create(createInstructorDto: CreateInstructorDto, cv: string) {
     const instructor = {
-      cv : cv ,
-      startDate : createInstructorDto.startDate,
-      endDate : createInstructorDto.endDate ,
-      user : createInstructorDto.user ,
+      cv: cv,
+      startDate: createInstructorDto.startDate,
+      endDate: createInstructorDto.endDate,
+      user: createInstructorDto.user,
+    };
+    try {
+      return this.instructorRepository.save(instructor);
+    } catch (e) {
+      fs.unlink(
+        path.resolve(path.join(__dirname, '..', '..', 'uploads', cv)),
+        (err) => {
+          if (err) throw new NotFoundException(err.toString());
+        },
+      );
+      throw new InternalServerErrorException(e.toString());
     }
-    return this.instructorRepository.save(instructor) ;
   }
 
   async findAll() {
@@ -27,7 +40,8 @@ export class InstructorService {
   }
 
   async getAllinstructorsSortedAndPaginated(findOptions: FindInstructorDto) {
-    const queryBuilder = this.instructorRepository.createQueryBuilder('instructor');
+    const queryBuilder =
+      this.instructorRepository.createQueryBuilder('instructor');
     const orderBy = findOptions.orderBy ? findOptions.orderBy : 'createdAt';
     const sort = findOptions.sort
       ? findOptions.sort === 'ASC'
@@ -51,10 +65,14 @@ export class InstructorService {
   }
 
   async findOne(id: number) {
-    return this.instructorRepository.findOne({where:{id}});
+    return this.instructorRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, updateinstructorDto: UpdateInstructorDto) {
+  async update(
+    id: number,
+    updateinstructorDto: UpdateInstructorDto,
+    fileName = null,
+  ) {
     const instructor = await this.instructorRepository.preload({
       id,
       ...updateinstructorDto,
@@ -62,11 +80,28 @@ export class InstructorService {
     if (!instructor) {
       throw new NotFoundException(`instructor with id ${id} does not exist`);
     }
+    if (fileName) {
+      fs.unlink(
+        path.resolve(
+          path.join(__dirname, '..', '..', 'uploads', instructor.cv),
+        ),
+        (err) => {
+          if (err) throw new NotFoundException(err.toString());
+        },
+      );
+      const instructorToUpdate = { ...instructor, cv: fileName };
+      return this.instructorRepository.save(instructorToUpdate);
+    }
     return this.instructorRepository.save(instructor);
   }
 
   async remove(id: number) {
     const result = await this.instructorRepository.softDelete(id);
+    if (result.affected) return result;
+    throw new NotFoundException(`instructor with id ${id} does not exist`);
+  }
+  async hardDelete(id: number) {
+    const result = await this.instructorRepository.delete(id);
     if (result.affected) return result;
     throw new NotFoundException(`instructor with id ${id} does not exist`);
   }

@@ -22,14 +22,14 @@ export class Course extends timeStamp {
     @Column()
      capacity: number;
     @JoinColumn()
-    @ManyToOne(type=>dummyInstructor,{         //options to review
+    @ManyToOne(()=>dummyInstructor,{         //options to review
        eager:true,
        cascade:['update','insert'],
        nullable:true
     })
     instructedBy:dummyInstructor
     @JoinColumn()
-    @ManyToOne(type=>dummyManager,{       //options to review
+    @ManyToOne(()=>dummyManager,{       //options to review
         eager:true,
         cascade:['update','insert'],
         nullable:true
