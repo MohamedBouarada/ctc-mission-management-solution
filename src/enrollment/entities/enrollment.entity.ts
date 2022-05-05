@@ -19,7 +19,7 @@ export class Enrollment extends timeStamp {
   @ManyToOne(() => User, {
     // TODO: options to review
     eager: true,
-    cascade: ['insert'],
+   // cascade: ['insert'],
     onDelete: 'SET NULL',
   })
   user: User;
