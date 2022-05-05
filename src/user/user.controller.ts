@@ -13,7 +13,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import { FindUserDto } from './dto/find-user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 
 @Controller('user')
 export class UserController {
@@ -35,6 +35,13 @@ export class UserController {
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<User> {
     return this.userService.updateUser(id, updateUserDto);
+  }
+  @Patch('/password/:id')
+  updateUserPassword(
+    @Param('id') id: number,
+    @Body() updateUserPasswordDto: UpdateUserPasswordDto,
+  ): Promise<User> {
+    return this.userService.updateUserPassword(id, updateUserPasswordDto);
   }
 
   @Delete('/:id')

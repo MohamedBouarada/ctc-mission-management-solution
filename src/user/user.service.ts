@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -9,6 +10,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { FindUserDto } from './dto/find-user.dto';
+import * as bcrypt from 'bcrypt';
+import { hashPassword } from 'src/shared/hash-password';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 
 @Injectable()
 export class UserService {
@@ -17,7 +21,7 @@ export class UserService {
   ) {}
 
   async getOneUser(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({where:{id}});
+    const user = await this.userRepository.findOne({where : {id}});
     if (user) {
       return user;
     }
@@ -25,7 +29,7 @@ export class UserService {
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    return await this.userRepository.findOne({where:{ email }});
+    return await this.userRepository.findOne({where :{ email }});
   }
 
   async getAllUsers(): Promise<User[]> {
@@ -73,18 +77,68 @@ export class UserService {
         errorMsgs['phoneNumber'] = 'Phone number already used';
       throw new ConflictException(errorMsgs);
     }
-
-    const result = await this.userRepository.save(createUserDto);
+    const { repeat_password, ...userToSave } = createUserDto;
+    const result = await this.userRepository.save(userToSave);
     delete result.password;
     return result;
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    const user = await this.userRepository.preload({ id, ...updateUserDto });
-    if (user) {
-      return this.userRepository.save(user);
+    const user = await this.userRepository.findOne(id);
+    if (!user) {
+      throw new NotFoundException(`user with id ${id} does not exist`);
     }
-    throw new NotFoundException(`user with id ${id} does not exist.`);
+    const isEqualPassword = await bcrypt.compare(
+      updateUserDto.confirmationPassword,
+      user.password,
+    );
+    if (!isEqualPassword) {
+      throw new BadRequestException(`Passwords do not match`);
+    }
+    delete updateUserDto.confirmationPassword;
+    /* if (updateUserDto.password) {
+      updateUserDto.password = await hashPassword(updateUserDto.password);
+    }
+
+    */
+    const updatedUser = { ...user, ...updateUserDto };
+    try {
+      const result = await this.userRepository.save(updatedUser);
+      delete result.password;
+      delete result.deletedAt;
+      return result;
+    } catch (err) {
+      throw new ConflictException(`Email Or Phone number already exist`);
+    }
+  }
+
+  async updateUserPassword(
+    id: number,
+    updateUserPasswordDto: UpdateUserPasswordDto,
+  ): Promise<User> {
+    const user = await this.userRepository.findOne(id);
+    if (!user) {
+      throw new NotFoundException(`user with id ${id} does not exist`);
+    }
+    const isEqualPassword = await bcrypt.compare(
+      updateUserPasswordDto.old_password,
+      user.password,
+    );
+    if (!isEqualPassword) {
+      throw new BadRequestException(`Passwords do not match`);
+    }
+    const newHashedPassword = await hashPassword(
+      updateUserPasswordDto.password,
+    );
+    const updatedUser = { ...user, password: newHashedPassword };
+    try {
+      const result = await this.userRepository.save(updatedUser);
+      delete result.password;
+      delete result.deletedAt;
+      return result;
+    } catch (err) {
+      throw new ConflictException(err.toString());
+    }
   }
 
   async softDelete(id: number): Promise<UpdateResult> {

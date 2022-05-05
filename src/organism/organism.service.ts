@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NotFoundError } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CreateOrganismDto } from './dto/create-organism.dto';
 import { UpdateOrganismDto } from './dto/update-organism.dto';
@@ -46,7 +45,7 @@ export class OrganismService {
   }
 
   async findOne(id: number) {
-    return this.organismRepository.findOne({where:{id}});
+    return this.organismRepository.findOne({where :{id}});
   }
 
   async update(id: number, updateOrganismDto: UpdateOrganismDto) {
