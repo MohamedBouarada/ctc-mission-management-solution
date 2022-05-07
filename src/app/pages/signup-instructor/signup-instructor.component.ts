@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 import {MatChipInputEvent} from '@angular/material/chips';
 import {  MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { map, Observable, startWith } from 'rxjs';
 
 export interface Course {
   name: string;
@@ -25,7 +26,11 @@ export class SignupInstructorComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   courses: Course[] = [];
+  trainingCourseCtrl=new FormControl();
+  filteredCourses: Observable<string[]>;
   fixedCourses :string[] = ['Javascript', 'PHP', 'Flutter', 'Symfony', 'JEE'];
+  @ViewChild('trainingCourseInput') trainingCourseInput!: ElementRef<HTMLInputElement>;
+
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -36,6 +41,8 @@ export class SignupInstructorComponent implements OnInit {
 
     // Clear the input value
     event.chipInput!.clear();
+    this.trainingCourseCtrl.setValue(null);
+
   }
 
   remove(course: Course): void {
@@ -47,14 +54,26 @@ export class SignupInstructorComponent implements OnInit {
   }
   selected(event: MatAutocompleteSelectedEvent): void {
     this.courses.push({name:event.option.viewValue});
-    
+    console.log(event.option.value);
+    this.trainingCourseInput.nativeElement.value = '';
+    this.trainingCourseCtrl.setValue(null);
+    console.log(this.courses);
   }
   constructor(private fb: FormBuilder,private http:HttpClient) {
-    
+    this.filteredCourses = this.trainingCourseCtrl.valueChanges.pipe(
+      startWith(null),
+      map((course: string | null) => (course ? this._filter(course) : this.fixedCourses.slice())),
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.fixedCourses.filter(course => course.toLowerCase().includes(filterValue));
   }
   submitForm(): void {
     
   }
+  
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       firstName: [null, [Validators.required]],
