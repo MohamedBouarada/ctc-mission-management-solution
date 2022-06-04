@@ -2,6 +2,8 @@ import { timeStamp } from "src/shared/time-stamp";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { dummyInstructor} from "./dummyInstructor.entity";
 import { dummyManager } from "./dummyManger.entity";
+import { Instructor } from "../../instructor/entities/instructor.entity";
+import { User } from "../../user/entities/user.entity";
 
 @Entity()
 export class Course extends timeStamp {
@@ -22,19 +24,19 @@ export class Course extends timeStamp {
     @Column()
      capacity: number;
     @JoinColumn()
-    @ManyToOne(()=>dummyInstructor,{         //options to review
+    @ManyToOne(()=>Instructor,{         //options to review
        eager:true,
        cascade:['update','insert'],
        nullable:true
     })
-    instructedBy:dummyInstructor
+    instructedBy:Instructor
     @JoinColumn()
     @ManyToOne(()=>dummyManager,{       //options to review
         eager:true,
         cascade:['update','insert'],
         nullable:true
      })
-     plannedBy:dummyManager
+     plannedBy:User
 
  
 }

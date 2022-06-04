@@ -48,4 +48,9 @@ export class EnrollmentController {
   async hardDelete(@Param('id') id: number): Promise<DeleteResult> {
     return await this.enrollmentService.hardDelete(id);
   }
+
+  @Post("/report/:id")
+  async cancelEnrollment(@Param('id') id:number) {
+    return await this.enrollmentService.cancelEnrollment(id)
+  }
 }

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -13,6 +14,7 @@ import {
   convertJsonToString,
   convertStringToJson,
 } from '../shared/json-to-string.utility';
+import { statesEnum } from './enums/states.enum';
 
 @Injectable()
 export class EnrollmentService {
@@ -44,12 +46,14 @@ export class EnrollmentService {
   async findAll(): Promise<Enrollment[]> {
     return await this.enrollmentRepository.find();
   }
+
   async findAllPaginated(offset: number, take: number): Promise<Enrollment[]> {
     return await this.enrollmentRepository.find({
       take: take,
       skip: offset,
     });
   }
+
   async findAllSortedAndPaginated(findOptions: findInstanceDto) {
     const queryBuilder =
       this.enrollmentRepository.createQueryBuilder('Enrollment');
@@ -135,5 +139,65 @@ export class EnrollmentService {
       return enrollmentToDelete;
     }
     throw new NotFoundException(`enrollment with id ${id} does not exist`);
+  }
+
+  async cancelEnrollment(id: number) {
+    const enrollment = await this.enrollmentRepository.findOne({
+      where: { id },
+    });
+
+    if (enrollment) {
+      if (enrollment.state == statesEnum.canceled) {
+        throw new BadRequestException('enrollment already canceled');
+      }
+      const courseDate = new Date(enrollment.course.startDate);
+      const before2weeks = new Date(
+        courseDate.setDate(courseDate.getDate() - 7),
+      );
+      if (
+        enrollment.state == statesEnum.inProgress ||
+        new Date(Date.now()) < before2weeks
+      ) {
+        enrollment.state = statesEnum.canceled;
+        const enrollmentToUpdate = await this.enrollmentRepository.preload({
+          id,
+          ...enrollment,
+        });
+        if (enrollmentToUpdate) {
+          return await this.enrollmentRepository.save(enrollmentToUpdate);
+        } else {
+          throw new NotFoundException(
+            `Enrollement with id ${id} does not exist.`,
+          );
+        }
+      } else {
+        const courseDate2 = new Date(enrollment.course.startDate);
+        const before2days = new Date(
+          courseDate2.setDate(courseDate2.getDate() - 2),
+        );
+        if (new Date(Date.now()) < before2days) {
+          const penalty = enrollment.course.price / 4;
+          enrollment.penalization = penalty;
+          enrollment.state = statesEnum.canceled;
+          const enrollmentToUpdate = await this.enrollmentRepository.preload({
+            id,
+            ...enrollment,
+          });
+          if (enrollmentToUpdate) {
+            return await this.enrollmentRepository.save(enrollmentToUpdate);
+          } else {
+            throw new NotFoundException(
+              `Enrollement with id ${id} does not exist.`,
+            );
+          }
+        } else {
+          throw new BadRequestException(
+            'sorry , you cant cancel your enrollment',
+          );
+        }
+      }
+
+    }
+    throw new NotFoundException(` no enrollment found `);
   }
 }

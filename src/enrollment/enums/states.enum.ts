@@ -1,4 +1,5 @@
 export enum statesEnum {
     confirmed='confirmed',
-    inProgress='inProgress'
+    inProgress='inProgress',
+    canceled = "canceled"
 }

@@ -1,4 +1,4 @@
-import { IsEmail, MinLength } from 'class-validator';
+import { IsEmail, IsNumber, IsPositive, MinLength } from "class-validator";
 import { Timestamp } from 'src/generics/timestamp.entity';
 import { Instructor } from 'src/instructor/entities/instructor.entity';
 import { Organism } from 'src/organism/entities/organism.entity';
@@ -49,4 +49,6 @@ export class User extends Timestamp {
 
   @OneToOne(() => Instructor, (instructor) => instructor.user)
   instructor: Instructor;
+  
+
 }

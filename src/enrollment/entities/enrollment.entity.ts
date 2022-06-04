@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { statesEnum } from '../enums/states.enum';
 import { userTypesEnum } from '../enums/user-types.enum';
+import { IsNumber, IsPositive } from "class-validator";
 
 @Entity()
 export class Enrollment extends timeStamp {
@@ -47,4 +48,12 @@ export class Enrollment extends timeStamp {
   size: number;
   @Column({ nullable: true })
   extraInformations: string;
+
+  @Column({
+    default:0,
+    type :"double"
+  })
+  @IsNumber()
+  @IsPositive()
+  penalization:number
 }
