@@ -4,7 +4,8 @@
 
 # local uploads
 /uploads/*
-
+#env variables
+.env
 # Logs
 logs
 *.log

@@ -13,15 +13,19 @@ import { FindUserDto } from './dto/find-user.dto';
 import * as bcrypt from 'bcrypt';
 import { hashPassword } from 'src/shared/hash-password';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import { MailService } from '../mail/mail.service';
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private mailService: MailService,
+    private configService : ConfigService
   ) {}
 
   async getOneUser(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({where : {id}});
+    const user = await this.userRepository.findOne({ where: { id } });
     if (user) {
       return user;
     }
@@ -29,7 +33,7 @@ export class UserService {
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    return await this.userRepository.findOne({where :{ email }});
+    return await this.userRepository.findOne({ where: { email } });
   }
 
   async getAllUsers(): Promise<User[]> {
@@ -80,6 +84,11 @@ export class UserService {
     const { repeat_password, ...userToSave } = createUserDto;
     const result = await this.userRepository.save(userToSave);
     delete result.password;
+    await this.mailService.sendUserCreateAccount(
+      createUserDto.firstName,
+      createUserDto.lastName,
+      createUserDto.email,
+    );
     return result;
   }
 
