@@ -23,6 +23,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SignupUserComponent } from './pages/signup-user/signup-user.component';
 import { SignupOrganismComponent } from './pages/signup-organism/signup-organism.component';
 import { CardComponent } from './shared/card/card.component';
+import { AdminModule } from './admin/admin.module';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -57,6 +58,7 @@ registerLocaleData(en);
     FullCalendarModule,
     BrowserModule,
     HttpClientModule,
+    AdminModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

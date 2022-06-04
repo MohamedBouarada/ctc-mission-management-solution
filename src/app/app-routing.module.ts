@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { FormationComponent } from './componnents/formation/formation.component';
 import { PlanningComponent } from './componnents/planning/planning.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'signup-organism', component: SignupOrganismComponent },
   { path: 'planning', component: PlanningComponent },
   { path: 'AddEventForm', component: FormationComponent },
+  {path:'adminDashBoard',component:DashboardComponent}
 ];
 
 @NgModule({
