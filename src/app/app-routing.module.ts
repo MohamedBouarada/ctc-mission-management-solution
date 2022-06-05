@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardAdminComponent } from './admin/dashboard/dashboard.component';
 import { FormationComponent } from './componnents/formation/formation.component';
 import { PlanningComponent } from './componnents/planning/planning.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'signup-instructor', component: SignupInstructorComponent },
   { path: 'profile-update', component: ProfileUpdateComponent },
   { path: 'dashboard-client', component: DashboardComponent },
-
+  {path:'adminDashBoard',component:DashboardAdminComponent}
 ];
 
 @NgModule({

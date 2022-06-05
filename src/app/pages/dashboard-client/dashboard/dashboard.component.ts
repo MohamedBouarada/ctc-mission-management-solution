@@ -6,10 +6,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
+  isEnrolledCoursesViewContext: boolean;
+  isProfileViewContext: boolean;
+  isPlanningViewContext: boolean;
+ 
+  
+  constructor() {
+    this.isEnrolledCoursesViewContext = true;
+    this.isPlanningViewContext=false;
+    this.isProfileViewContext=false;
+   }
 
   ngOnInit(): void {
+  }
+  swapViewToProfilePage() {
+    this.isEnrolledCoursesViewContext = false;
+    this.isPlanningViewContext=false;
+    this.isProfileViewContext=true;
+  }
+  swapViewToPlanningPage() {
+    this.isEnrolledCoursesViewContext = false;
+    this.isPlanningViewContext=true;
+    this.isProfileViewContext=false;
+  }
+  swapViewToEnrolledCoursesPage() {
+    this.isEnrolledCoursesViewContext = true;
+    this.isPlanningViewContext=false;
+    this.isProfileViewContext=false;
   }
 
 }

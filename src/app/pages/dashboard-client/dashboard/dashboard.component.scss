@@ -26,6 +26,10 @@ ul {
         margin: 8%;
         font-size: larger;
         font-weight: 600;
+        i{
+            color: #ffae00;
+            font-size: larger;
+        }
     }
 }
 
@@ -39,7 +43,7 @@ nz-content {
 }
 
 nz-layout {
-    height: 100%;
+    min-height: 100%;
 }
 
 nz-breadcrumb {
@@ -55,3 +59,31 @@ nz-breadcrumb {
 nz-footer {
     text-align: center;
 }
+.card-container {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    padding: 20px;
+    padding-top: 100px;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    * {
+      flex: 0 0 30%;
+    }
+  }
+  .container{
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    padding-top: 100px;
+    justify-content: center;
+  }
+  .titleContainer{
+      font-size: 3rem;
+      font-weight: 600;
+      color: #ffae00;
+      text-align: center;
+      border-bottom: 3px solid #0c0449;
+      padding-bottom: 20px;
+  }

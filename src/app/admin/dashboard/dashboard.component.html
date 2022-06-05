@@ -1,0 +1,43 @@
+<nz-layout>
+    <nz-sider nzCollapsible nzWidth="200px">
+        <div class="logo">
+            <img src="/assets/Images/logo.png" alt="medsirat logo">
+        </div>
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+            <li nz-menu-item>
+                <i nz-icon nzType="dashboard"></i>
+                <span>Dashboard </span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="user"></i>
+                <span>Admin profile</span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="user"></i>
+                <span>Users</span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="user"></i>
+                <span>Instructors</span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="team"></i>
+                <span>Organisms</span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="book"></i>
+                <span>Courses</span>
+            </li>
+            <li nz-menu-item style="margin-top:40%">
+                <i nz-icon nzType="logout"></i>
+                <span>Log out</span>
+            </li>
+        </ul>
+
+    </nz-sider>
+    <nz-layout>
+        <nz-content>
+            <app-table></app-table>
+        </nz-content>
+    </nz-layout>
+</nz-layout>
