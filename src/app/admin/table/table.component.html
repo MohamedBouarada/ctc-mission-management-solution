@@ -1,33 +1,28 @@
-<nz-table #dynamicTable [nzScroll]="{ x: scrollX, y: scrollY }" [nzData]="listOfData" [nzTableLayout]="settingValue.tableLayout" [nzBordered]="settingValue.bordered" [nzSimple]="settingValue.simple" [nzLoading]="settingValue.loading" [nzPaginationType]="settingValue.paginationType"
-    [nzPaginationPosition]="settingValue.position" [nzShowSizeChanger]="settingValue.sizeChanger" [nzFrontPagination]="settingValue.pagination" [nzShowPagination]="settingValue.pagination" [nzFooter]="settingValue.footer ? 'Here is Footer' : null" [nzTitle]="settingValue.title ? 'Here is Title' : null"
-    [nzSize]="settingValue.size" (nzCurrentPageDataChange)="currentPageDataChange($event)">
+<button nz-button nzType="primary">Add User</button>
+<br />
+<br />
+<nz-table #editRowTable nzBordered [nzData]="listOfData">
     <thead>
-        <tr *ngIf="settingValue.header">
-            <th nzWidth="40px" *ngIf="settingValue.expandable" [nzLeft]="fixedColumn"></th>
-            <th *ngIf="settingValue.checkbox" nzWidth="60px" [(nzChecked)]="allChecked" [nzLeft]="fixedColumn" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
-            <th [nzLeft]="fixedColumn">Name</th>
+        <tr>
+            <th nzWidth="30%">Name</th>
             <th>Age</th>
             <th>Address</th>
-            <th [nzRight]="fixedColumn">Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let data of dynamicTable.data">
-            <tr>
-                <td [nzLeft]="fixedColumn" *ngIf="settingValue.expandable" [(nzExpand)]="data.expand"></td>
-                <td [nzLeft]="fixedColumn" *ngIf="settingValue.checkbox" [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
-                <td [nzLeft]="fixedColumn">{{ data.name }}</td>
-                <td>{{ data.age }}</td>
-                <td [nzEllipsis]="settingValue.ellipsis">{{ data.address }}</td>
-                <td [nzRight]="fixedColumn" [nzEllipsis]="settingValue.ellipsis">
-                    <a href="#">Delete</a>
-                    <nz-divider nzType="vertical"></nz-divider>
-                    <a href="#">More action</a>
-                </td>
-            </tr>
-            <tr *ngIf="settingValue.expandable" [nzExpand]="data.expand">
-                <span>{{ data.description }}</span>
-            </tr>
-        </ng-container>
+        <tr *ngFor="let data of editRowTable.data" class="editable-row">
+            <td>
+                <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
+                    {{ data.name }}
+                </div>
+                <input [hidden]="editId !== data.id" type="text" (blur)="stopEdit()" nz-input [(ngModel)]="data.name" />
+            </td>
+            <td>{{ data.age }}</td>
+            <td>{{ data.address }}</td>
+            <td>
+                <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
+            </td>
+        </tr>
     </tbody>
 </nz-table>

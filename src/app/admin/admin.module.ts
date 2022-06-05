@@ -6,6 +6,7 @@ import { NgZoroModule } from '../ng-zoro.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { TableComponent } from './table/table.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,13 +16,14 @@ import { NzTableModule } from 'ng-zorro-antd/table';
   declarations: [
   
     DashboardComponent,
-       TableComponent
+    TableComponent
   ],
   imports: [
     CommonModule,
     NgZoroModule,
     NzLayoutModule,
-    NzTableModule
+    NzTableModule,
+    FormsModule
   ]
 })
 export class AdminModule { }
