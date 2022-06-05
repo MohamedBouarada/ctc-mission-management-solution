@@ -31,6 +31,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProfileUpdateComponent } from './pages/profile-update/profile-update.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { DashboardClientModule } from './pages/dashboard-client/dashboard-client.module';
+
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -73,6 +75,7 @@ registerLocaleData(en);
     MatIconModule,
     MatAutocompleteModule,
     NzDatePickerModule,
+    DashboardClientModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

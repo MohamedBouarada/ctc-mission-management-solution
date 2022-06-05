@@ -7,6 +7,8 @@ import { SignupOrganismComponent } from './pages/signup-organism/signup-organism
 import { SignupUserComponent } from './pages/signup-user/signup-user.component';
 import { SignupInstructorComponent } from './pages/signup-instructor/signup-instructor.component';
 import { ProfileUpdateComponent } from './pages/profile-update/profile-update.component';
+import { DashboardComponent } from './pages/dashboard-client/dashboard/dashboard.component';
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -17,6 +19,7 @@ const routes: Routes = [
   { path: 'AddEventForm', component: FormationComponent },
   { path: 'signup-instructor', component: SignupInstructorComponent },
   { path: 'profile-update', component: ProfileUpdateComponent },
+  { path: 'dashboard-client', component: DashboardComponent },
 
 ];
 
