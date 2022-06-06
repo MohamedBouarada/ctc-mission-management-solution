@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { UsersTableService } from './users-table.service';
+import { IUsers } from './usersInterface';
 
 
 
-interface ItemData {
-  id: string;
-  name: string;
-  age: string;
-  address: string;
-}
+
 
 
 
@@ -19,27 +16,24 @@ interface ItemData {
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-
+  j=0;
   i = 0;
   editId: string | null = null;
-  listOfData: ItemData[] = [];
+  listOfData: IUsers[] = [];
 
-  startEdit(id: string): void {
-    this.editId = id;
-  }
-
-  stopEdit(): void {
-    this.editId = null;
-  }
+constructor(private usersTable:UsersTableService){}
 
   addRow(): void {
     this.listOfData = [
       ...this.listOfData,
       {
         id: `${this.i}`,
-        name: `Edward King ${this.i}`,
-        age: '32',
-        address: `London, Park Lane no. ${this.i}`
+        firstName: `Edward`,
+        lastName:`King ${this.i}`,
+        email: 'test@gmail.com',
+        telephone: `216${this.i}`,
+        cin:'1212121',
+        password:'*****'
       }
     ];
     this.i++;
@@ -50,8 +44,22 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addRow();
-    this.addRow();
+   this.usersTable.getUsers().pipe(map(
+     (responseData)=>{
+       const usersArray=[];
+       for(const key in responseData){
+          if(responseData.hasOwnProperty(key)){
+            usersArray.push({...responseData[key]});
+          }
+       }
+       return usersArray[0];
+     }
+   )).subscribe(
+     (data)=>{console.log(data);
+      this.listOfData.push(data);
+      console.log(this.listOfData);
+    }
+   );
   }
   }
 
