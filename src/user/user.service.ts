@@ -21,7 +21,6 @@ export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private mailService: MailService,
-    private configService : ConfigService
   ) {}
 
   async getOneUser(id: number): Promise<User> {
@@ -84,7 +83,7 @@ export class UserService {
     const { repeat_password, ...userToSave } = createUserDto;
     const result = await this.userRepository.save(userToSave);
     delete result.password;
-    await this.mailService.sendUserCreateAccount(
+     this.mailService.sendUserCreateAccount(
       createUserDto.firstName,
       createUserDto.lastName,
       createUserDto.email,

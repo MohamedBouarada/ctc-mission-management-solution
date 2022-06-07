@@ -1,4 +1,8 @@
-import { HttpException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateInstructorDto } from './dto/create-instructor.dto';
@@ -7,22 +11,27 @@ import { UpdateInstructorDto } from './dto/update-instructor.dto';
 import { Instructor } from './entities/instructor.entity';
 import * as fs from 'fs';
 import * as path from 'path';
+import { RolesEnum } from '../user/enums/roles.enum';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class InstructorService {
   constructor(
     @InjectRepository(Instructor)
     private instructorRepository: Repository<Instructor>,
+    private authService: AuthService,
   ) {}
 
   async create(createInstructorDto: CreateInstructorDto, cv: string) {
-    const instructor = {
-      cv: cv,
-      startDate: createInstructorDto.startDate,
-      endDate: createInstructorDto.endDate,
-      user: createInstructorDto.user,
-    };
     try {
+      createInstructorDto.user.role = RolesEnum.INSTRUCTOR_REQUEST;
+      const savedUser = await this.authService.signup(createInstructorDto.user);
+      const instructor = {
+        cv: cv,
+        startDate: createInstructorDto.startDate,
+        endDate: createInstructorDto.endDate,
+        user: savedUser,
+      };
       return this.instructorRepository.save(instructor);
     } catch (e) {
       fs.unlink(
@@ -54,7 +63,8 @@ export class InstructorService {
     queryBuilder
       .orderBy(`instructor.${orderBy}`, sort)
       .offset((page - 1) * perPage)
-      .limit(perPage);
+      .limit(perPage)
+      .leftJoinAndSelect('instructor.user', 'user');
     const total = await queryBuilder.getCount();
     return {
       data: await queryBuilder.getMany(),

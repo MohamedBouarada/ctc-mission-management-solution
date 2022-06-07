@@ -14,7 +14,7 @@ import { OrganismNautreEnum } from '../enums/organism-nature.enum';
 import { User } from '../../user/entities/user.entity';
 import { CreateUserDto } from "../../user/dto/create-user.dto";
 
-export class CreateOrganismDto {
+export class SaveOrganismDto {
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -48,5 +48,6 @@ export class CreateOrganismDto {
 
 
   @IsNotEmpty()
-  contactPerson: CreateUserDto;
+
+  contactPerson: Partial<User>;
 }

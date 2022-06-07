@@ -47,6 +47,7 @@ export class User extends Timestamp {
   @OneToOne(() => Organism, (organism) => organism.contactPerson)
   organism: Organism;
 
+
   @OneToOne(() => Instructor, (instructor) => instructor.user)
   instructor: Instructor;
   

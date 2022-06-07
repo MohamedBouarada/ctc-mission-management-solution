@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { User } from 'src/user/entities/user.entity';
@@ -24,7 +24,10 @@ export class AuthService {
     return 'hello from signin';
   }
 
-  organismSignup(createOrganismDto: CreateOrganismDto) {
-    return this.organismService.create(createOrganismDto);
+  async organismSignup(createOrganismDto: CreateOrganismDto) {
+
+  const savedContact = await this.signup(createOrganismDto.contactPerson) ;
+  const organismToSave = { ...createOrganismDto , contactPerson:savedContact}
+    return this.organismService.create(organismToSave);
   }
 }
