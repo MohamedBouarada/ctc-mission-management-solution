@@ -4,10 +4,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { NgZoroModule } from '../ng-zoro.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { TableComponent } from './table/table.component';
+import { TableComponent } from './users/table.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { InstructorsComponent } from './instructors/instructors.component';
+import { OrganismsComponent } from './organisms/organisms.component';
 
 
 
@@ -15,9 +17,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-  
+
     DashboardComponent,
-    TableComponent
+    TableComponent,
+    InstructorsComponent,
+    OrganismsComponent,
+
   ],
   imports: [
     CommonModule,

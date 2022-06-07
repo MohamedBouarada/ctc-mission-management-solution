@@ -7,7 +7,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>CIN</th>
+            <th>phone number</th>
             <th nzWidth="15%">Action</th>
         </tr>
     </thead>
@@ -16,7 +16,7 @@
             <td>{{data.firstName}}</td>
             <td>{{data.lastName}}</td>
             <td>{{data.email}}</td>
-            <td>{{ data.cin }}</td>
+            <td>{{ data.phoneNumber }}</td>
             <td>
                 <a nz-button nzType="link" nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
                 <a nz-button nzType="link">Edit</a>
