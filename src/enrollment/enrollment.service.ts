@@ -15,12 +15,14 @@ import {
   convertStringToJson,
 } from '../shared/json-to-string.utility';
 import { statesEnum } from './enums/states.enum';
+import { CoursesService } from '../courses/courses.service';
 
 @Injectable()
 export class EnrollmentService {
   constructor(
     @InjectRepository(Enrollment)
     private enrollmentRepository: Repository<Enrollment>,
+    private courseService: CoursesService,
   ) {}
 
   async create(createEnrollmentDto: CreateEnrollmentDto) {
@@ -39,6 +41,12 @@ export class EnrollmentService {
       extraInformations: convertJsonToString(extraInformations),
       ...others,
     };
+    const course = await this.courseService.findOne(
+      +createEnrollmentDto.course,
+    );
+    if (course.placesAvailable < createEnrollmentDto.size) {
+      throw new BadRequestException('no places available, sorry');
+    }
     return await this.enrollmentRepository.save(enrollmentToSave);
     // return await this.enrollmentRepository.save(createEnrollmentDto);
   }
@@ -92,6 +100,7 @@ export class EnrollmentService {
   async findOne(id: number): Promise<Enrollment> {
     const enrollmentExists = await this.enrollmentRepository.findOne({
       where: { id },
+      relations: ['course'],
     });
     if (enrollmentExists) {
       delete enrollmentExists.user.password;
@@ -164,6 +173,12 @@ export class EnrollmentService {
           ...enrollment,
         });
         if (enrollmentToUpdate) {
+          const newPlaces =
+            enrollmentToUpdate.course.placesAvailable + enrollmentToUpdate.size;
+          await this.courseService.update(enrollmentToUpdate.course.id, {
+            ...enrollmentToUpdate.course,
+            placesAvailable: newPlaces,
+          });
           return await this.enrollmentRepository.save(enrollmentToUpdate);
         } else {
           throw new NotFoundException(
@@ -184,6 +199,13 @@ export class EnrollmentService {
             ...enrollment,
           });
           if (enrollmentToUpdate) {
+            const newPlaces =
+              enrollmentToUpdate.course.placesAvailable +
+              enrollmentToUpdate.size;
+            await this.courseService.update(enrollmentToUpdate.course.id, {
+              ...enrollmentToUpdate.course,
+              placesAvailable: newPlaces,
+            });
             return await this.enrollmentRepository.save(enrollmentToUpdate);
           } else {
             throw new NotFoundException(
@@ -196,8 +218,36 @@ export class EnrollmentService {
           );
         }
       }
-
     }
     throw new NotFoundException(` no enrollment found `);
+  }
+
+  async confirmEnrollment(id: number) {
+    const enrollmentToUpdate = await this.enrollmentRepository.preload({
+      id,
+      state: statesEnum.confirmed,
+    });
+    if (enrollmentToUpdate) {
+      // return enrollmentToUpdate
+
+      if (enrollmentToUpdate.course.placesAvailable === 0) {
+        throw new BadRequestException('no places available');
+      }
+      if (enrollmentToUpdate.course.placesAvailable < enrollmentToUpdate.size) {
+        throw new BadRequestException('no  enough places available');
+      }
+      const newPlaces =
+        enrollmentToUpdate.course.placesAvailable - enrollmentToUpdate.size;
+      const course = await this.courseService.update(
+        enrollmentToUpdate.course.id,
+        {
+          ...enrollmentToUpdate.course,
+          placesAvailable: newPlaces,
+        },
+      );
+      return await this.enrollmentRepository.save(enrollmentToUpdate);
+    } else {
+      throw new NotFoundException(`Enrollement with id ${id} does not exist.`);
+    }
   }
 }

@@ -21,6 +21,8 @@ export class Instructor extends Timestamp {
 
   @Column()
   endDate: Date;
+  @Column()
+  professionalImage: string;
 
   @OneToOne(() => User, (user) => user.instructor, {
     eager: true,

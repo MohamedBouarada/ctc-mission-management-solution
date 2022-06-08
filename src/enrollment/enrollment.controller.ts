@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { CreateEnrollmentDto } from './dto/create-enrollment.dto';
 import { UpdateEnrollmentDto } from './dto/update-enrollment.dto';
@@ -11,7 +20,10 @@ export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
   @Post()
-  async create(@Body() createEnrollmentDto: CreateEnrollmentDto): Promise<Enrollment> {
+  async create(
+    @Body() createEnrollmentDto: CreateEnrollmentDto,
+  ): Promise<Enrollment>
+  {
     return await this.enrollmentService.create(createEnrollmentDto);
   }
 
@@ -49,8 +61,13 @@ export class EnrollmentController {
     return await this.enrollmentService.hardDelete(id);
   }
 
-  @Post("/report/:id")
-  async cancelEnrollment(@Param('id') id:number) {
-    return await this.enrollmentService.cancelEnrollment(id)
+  @Post('/report/:id')
+  async cancelEnrollment(@Param('id') id: number) {
+    return await this.enrollmentService.cancelEnrollment(id);
+  }
+
+  @Patch('/confirm/:id')
+  async confirmEnrollment(@Param('id') id: number) {
+    return await this.enrollmentService.confirmEnrollment(id);
   }
 }

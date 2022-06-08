@@ -40,6 +40,10 @@ export class User extends Timestamp {
   })
   role: RolesEnum; // should be an array but mysql does not support it!!
 
+  @Column( {
+    nullable:true
+  })
+  profileImage : string
   @Column()
   @MinLength(8)
   password: string;

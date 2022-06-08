@@ -22,7 +22,7 @@ export class CreateEnrollmentDto extends timeStamp {
    @IsNumber()
   course: Course;
   @IsNotEmpty()
-  @IsEnum(statesEnum)
+  @IsEnum(statesEnum )
   state: statesEnum;
   @IsNotEmpty()
   @IsEnum(userTypesEnum)

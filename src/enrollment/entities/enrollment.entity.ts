@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { statesEnum } from '../enums/states.enum';
 import { userTypesEnum } from '../enums/user-types.enum';
-import { IsNumber, IsPositive } from "class-validator";
+import { IsNumber, IsPositive } from 'class-validator';
 
 @Entity()
 export class Enrollment extends timeStamp {
@@ -20,15 +20,15 @@ export class Enrollment extends timeStamp {
   @ManyToOne(() => User, {
     // TODO: options to review
     eager: true,
-   // cascade: ['insert'],
+    // cascade: ['insert'],
     onDelete: 'SET NULL',
   })
   user: User;
   @JoinColumn()
-  @ManyToOne(() => Course, {
+  @ManyToOne(() => Course, (e) => e.enrollments, {
     // TODO: options to review
     eager: true,
-    cascade: ['update', 'insert'],
+  //  cascade: ['update', 'insert'],
     onDelete: 'SET NULL',
   })
   course: Course;
@@ -50,10 +50,10 @@ export class Enrollment extends timeStamp {
   extraInformations: string;
 
   @Column({
-    default:0,
-    type :"double"
+    default: 0,
+    type: 'double',
   })
   @IsNumber()
   @IsPositive()
-  penalization:number
+  penalization: number;
 }

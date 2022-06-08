@@ -22,26 +22,17 @@ export class InstructorService {
     private authService: AuthService,
   ) {}
 
-  async create(createInstructorDto: CreateInstructorDto, cv: string) {
-    try {
+  async create(createInstructorDto: CreateInstructorDto ) {
+
       createInstructorDto.user.role = RolesEnum.INSTRUCTOR_REQUEST;
       const savedUser = await this.authService.signup(createInstructorDto.user);
       const instructor = {
-        cv: cv,
         startDate: createInstructorDto.startDate,
         endDate: createInstructorDto.endDate,
         user: savedUser,
       };
       return this.instructorRepository.save(instructor);
-    } catch (e) {
-      fs.unlink(
-        path.resolve(path.join(__dirname, '..', '..', 'uploads', cv)),
-        (err) => {
-          if (err) throw new NotFoundException(err.toString());
-        },
-      );
-      throw new InternalServerErrorException(e.toString());
-    }
+
   }
 
   async findAll() {
@@ -81,7 +72,6 @@ export class InstructorService {
   async update(
     id: number,
     updateinstructorDto: UpdateInstructorDto,
-    fileName = null,
   ) {
     const instructor = await this.instructorRepository.preload({
       id,
@@ -90,18 +80,7 @@ export class InstructorService {
     if (!instructor) {
       throw new NotFoundException(`instructor with id ${id} does not exist`);
     }
-    if (fileName) {
-      fs.unlink(
-        path.resolve(
-          path.join(__dirname, '..', '..', 'uploads', instructor.cv),
-        ),
-        (err) => {
-          if (err) throw new NotFoundException(err.toString());
-        },
-      );
-      const instructorToUpdate = { ...instructor, cv: fileName };
-      return this.instructorRepository.save(instructorToUpdate);
-    }
+
     return this.instructorRepository.save(instructor);
   }
 

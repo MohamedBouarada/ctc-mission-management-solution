@@ -44,7 +44,8 @@ export class CoursesService {
     queryBuilder
       .orderBy(`course.${orderBy}`, sort)
       .offset((page - 1) * perPage)
-      .limit(perPage);
+      .limit(perPage)
+      .leftJoinAndSelect('course.enrollments', 'enrollments');
     const total = await queryBuilder.getCount();
     return {
       data: await queryBuilder.getMany(),
@@ -55,7 +56,10 @@ export class CoursesService {
   }
 
   async findOne(id: number): Promise<Course> {
-    const courseExists = await this.courseRepository.findOne( {where :{id}} );
+    const courseExists = await this.courseRepository.findOne({
+      where: { id },
+      relations: ['enrollments'],
+    });
     if (courseExists) {
       return courseExists;
     }

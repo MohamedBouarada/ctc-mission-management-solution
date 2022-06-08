@@ -6,41 +6,21 @@ import {
   Patch,
   Param,
   Delete,
-  UseInterceptors,
-  UploadedFile,
   Query,
-  Res, UseFilters
-} from "@nestjs/common";
+} from '@nestjs/common';
 import { InstructorService } from './instructor.service';
 import { CreateInstructorDto } from './dto/create-instructor.dto';
 import { UpdateInstructorDto } from './dto/update-instructor.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { editFileName } from './editFile';
+
 import { FindOrganismDto } from 'src/organism/dto/find-organism.dto';
-import { UploadExceptionFilter } from "./upload-exception.filter";
 
 @Controller('instructor')
 export class InstructorController {
   constructor(private readonly instructorService: InstructorService) {}
 
-  @Post('upload')
-  @UseFilters( UploadExceptionFilter)
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: editFileName,
-      }),
-    }),
-  )
-
-  uploadFile(
-    @UploadedFile() file: Express.Multer.File,
-    @Body() createInstructorDto: CreateInstructorDto,
-  ) {
-    const filename = file.filename;
-    return this.instructorService.create(createInstructorDto, filename);
+  @Post()
+  uploadFile(@Body() createInstructorDto: CreateInstructorDto) {
+    return this.instructorService.create(createInstructorDto);
   }
 
   @Get()
@@ -55,32 +35,11 @@ export class InstructorController {
     return this.instructorService.findOne(+id);
   }
 
-  @Get('/cv/:file')
-  seeUploadedFile(@Param('file') file, @Res() res) {
-    return res.sendFile(file, { root: './uploads' });
-  }
-
   @Patch(':id')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: editFileName,
-      }),
-    }),
-  )
   async update(
-    @UploadedFile() file: Express.Multer.File,
     @Param('id') id: string,
     @Body() updateInstructorDto: UpdateInstructorDto,
   ) {
-    if (file) {
-      return this.instructorService.update(
-        +id,
-        updateInstructorDto,
-        file.filename,
-      );
-    }
     return this.instructorService.update(+id, updateInstructorDto);
   }
 

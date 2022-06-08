@@ -43,4 +43,7 @@ export class CreateUserDto {
   @MinLength(8)
   @Match('password')
   repeat_password: string;
+
+  @IsOptional()
+  profileImage:string;
 }
