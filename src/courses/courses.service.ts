@@ -37,7 +37,7 @@ export class CoursesService {
       ? findOptions.sort === 'ASC'
         ? 'ASC'
         : 'DESC'
-      : 'ASC';
+      : 'DESC';
     const page = findOptions.page ? findOptions.page : 1;
     const perPage = findOptions.perPage ? findOptions.perPage : 10;
 
@@ -45,7 +45,7 @@ export class CoursesService {
       .orderBy(`course.${orderBy}`, sort)
       .offset((page - 1) * perPage)
       .limit(perPage)
-      .leftJoinAndSelect('course.enrollments', 'enrollments');
+     // .leftJoinAndSelect('course.enrollments', 'enrollments');
     const total = await queryBuilder.getCount();
     return {
       data: await queryBuilder.getMany(),

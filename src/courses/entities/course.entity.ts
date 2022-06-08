@@ -4,9 +4,9 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+  OneToMany, PrimaryColumn,
+  PrimaryGeneratedColumn
+} from "typeorm";
 import { dummyInstructor } from './dummyInstructor.entity';
 import { dummyManager } from './dummyManger.entity';
 import { Instructor } from '../../instructor/entities/instructor.entity';
