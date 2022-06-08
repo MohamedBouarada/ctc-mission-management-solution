@@ -7,14 +7,14 @@
             <div class="col-sm-7">
               <div class="card-body">
                 <h5 class="card-title text-primary">{{ coursesDetails.name }}</h5>
-                <p class="mb-4">description</p>
+                <p class="mb-4">{{coursesDetails.description}}</p>
 
                 <a href="" class="btn btn-sm btn-outline-primary">Enroll</a>
               </div>
             </div>
             <div class="col-sm-5 text-center text-sm-left">
               <div class="card-body pb-0 px-0 px-md-4">
-                <img src="..\assets\Images\js.png" height="140" />
+                <img src="https://drive.google.com/uc?export=view&id={{coursesDetails.mainImage}}" height="140" />
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
               <div class="card-body">
                 <i class="fa-solid fa-calendar-days m-2"></i>Date debut
 
-                <h3 class="card-title mb-2">1 mai</h3>
+                <h3 class="card-title mb-2">{{startDateFormat}}</h3>
                 <small class="text-success fw-semibold"
                 ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
                 >
@@ -74,7 +74,7 @@
               <div class="card-body">
                 <i class="fa-solid fa-calendar-days m-2"></i>Date fin
 
-                <h3 class="card-title mb-2">20 mai</h3>
+                <h3 class="card-title mb-2">{{endDateFormat}}</h3>
                 <small class="text-success fw-semibold"
                 ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
                 >
@@ -86,7 +86,7 @@
               <div class="card-body">
                 <i class="fa-solid fa-location-dot m-2"></i>Adresse
 
-                <h3 class="card-title mb-2">Tunis</h3>
+                <h3 class="card-title mb-2">{{coursesDetails.address}}</h3>
                 <small class="text-success fw-semibold"
                 ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
                 >
@@ -96,9 +96,9 @@
           <div class="col-lg-6 col-6 mb-4">
             <div class="card">
               <div class="card-body">
-                <i class="fa-solid fa-tag m-2"></i>Capacite
+                <i class="fa-solid fa-tag m-2"></i>places restantes
 
-                <h3 class="card-title mb-2">12</h3>
+                <h3 class="card-title mb-2">{{coursesDetails.placesAvailable}}</h3>
                 <small class="text-success fw-semibold"
                 ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
                 >
@@ -141,7 +141,7 @@
             </div>
             <div class="col-lg-5 text-center text-md-left">
               <div class="card-body pb-0 px-0 px-md-4 m-2">
-                <img src="..\assets\Images\work.jpg" height="280" />
+                <img src="https://drive.google.com/uc?export=view&id={{coursesDetails.instructedBy.professionalImage}}" height="280" />
               </div>
             </div>
           </div>

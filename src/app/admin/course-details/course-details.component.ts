@@ -3,11 +3,13 @@ import {CourseDetailsServiceService} from "./course-details-service.service";
 import {map} from "rxjs/operators";
 import {ICourseDetails} from "./courseDetailsInterface";
 import {ActivatedRoute} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-course-details',
   templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.scss']
+  styleUrls: ['./course-details.component.scss'],
+  providers : [DatePipe]
 })
 export class CourseDetailsComponent implements OnInit {
 
@@ -23,6 +25,8 @@ export class CourseDetailsComponent implements OnInit {
     createdAt:"",
     updatedAt:"",
     deletedAt:"",
+    mainImage:"",
+    placesAvailable:"",
     "instructedBy": {
       "createdAt": "",
       "deletedAt": "",
@@ -31,6 +35,7 @@ export class CourseDetailsComponent implements OnInit {
       "cv": "",
       "startDate": "",
       "endDate": "",
+      professionalImage:"",
       "user": {
         "createdAt": "",
         "deletedAt": "",
@@ -51,7 +56,9 @@ export class CourseDetailsComponent implements OnInit {
   } ;
   courseId : string|null="";
   isDataFetched = false;
-  constructor( private courseDetailsService:CourseDetailsServiceService,private route:ActivatedRoute) { }
+   startDateFormat :string|null="";
+   endDateFormat :string|null="";
+  constructor( private courseDetailsService:CourseDetailsServiceService,private route:ActivatedRoute,private datePipe:DatePipe) { }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id');
@@ -64,6 +71,8 @@ export class CourseDetailsComponent implements OnInit {
       (user)=>{console.log(user);
         this.coursesDetails=user;
         this.isDataFetched=true;
+        this.startDateFormat = this.datePipe.transform(this.coursesDetails.startDate)
+        this.endDateFormat = this.datePipe.transform(this.coursesDetails.endDate)
         console.log(this.coursesDetails);
       }
     );

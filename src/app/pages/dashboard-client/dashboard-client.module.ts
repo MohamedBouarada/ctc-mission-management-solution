@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { NgZoroModule } from '../../ng-zoro.module';
@@ -39,6 +39,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserModule,
     NzMenuModule,
     MatFormFieldModule,
+
 
   ]
 })

@@ -7,11 +7,13 @@ export interface ICourseDetails {
   endDate: string,
   description:string,
   address:string,
+  placesAvailable:string,
   capacity:string,
   price:string,
   createdAt:string,
   updatedAt:string,
   deletedAt:string,
+  "mainImage":string,
   "instructedBy": {
     "createdAt": string,
     "deletedAt": string,
@@ -20,6 +22,8 @@ export interface ICourseDetails {
     "cv": string,
     "startDate": string,
     "endDate": string,
+    "professionalImage" : string,
+
     "user": {
       "createdAt": string,
       "deletedAt": string,
