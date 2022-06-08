@@ -1,0 +1,68 @@
+<div class="bg">
+    <div class="container">
+        <img nz-image width="200px" height="100px" nzSrc="/assets/Images/medsirat.png" alt="" class="logo" />
+        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+            <div class="login-form__header">
+                <h1>Signup as an instructor</h1>
+            </div>
+
+            <nz-form-item class="cv">
+                <nz-form-control nzErrorTip="Please upload your CV!">
+                    <nz-input-group>
+                        <label>Please add your CV</label>
+
+                        <input class="cvinput" type="file" formControlName="firstName" id="test" name="test" accept=".pdf,.doc" />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <mat-form-field class="example-chip-list" appearance="fill">
+                <mat-label>Please input at least a name of a training course!</mat-label>
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                    <mat-chip *ngFor="let course of courses" (removed)="remove(course)">
+                        {{course.name}}
+                        <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                    </mat-chip>
+                    <input placeholder="New training course..." #trainingCourseInput [formControl]="trainingCourseCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let course of fixedCourses " [value]="course">
+                        {{course}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+
+            <label>Specify your disponibility</label>
+            <nz-form-item class="availibility">
+                <nz-form-control nzErrorTip="Please specify your availibility!">
+                    <nz-input-group>
+                        <nz-range-picker [nzRenderExtraFooter]="plainFooter"></nz-range-picker>
+
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+
+
+
+            <div nz-row class="login-form-margin"></div>
+            <br />
+            <app-button [text]="textl"></app-button>
+            <br />
+            <div *ngIf="successMessage">
+                <nz-alert nzType="success" nzMessage="Sign Up successfully completed"></nz-alert>
+            </div>
+            <div *ngIf="errorMessage">
+                <div *ngFor="let e of errorMessage">
+                    <nz-alert nzType="error" nzMessage="{{ e }}"></nz-alert>
+                </div>
+            </div>
+            <div class="login-form_bottom">
+                already have an account ?
+                <a routerLink="/login">log in here</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<nz-layout>
+    <nz-sider nzCollapsible nzWidth="250px" class="sider">
+        <div class="logo">
+            <img src="/assets/Images/medsirat.png" alt="medsirat logo">
+        </div>
+        <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
+            
+            <li nz-menu-item (click)="swapViewToProfilePage()">
+                <i nz-icon nzType="user"></i>
+                <span>Profile</span>
+            </li>
+            <li nz-menu-item (click)="swapViewToPlanningPage()">
+                <i nz-icon nzType="calendar"></i>
+                <span>Planning</span>
+            </li>
+            <li nz-menu-item (click)="swapViewToEnrolledCoursesPage()">
+                <i nz-icon nzType="form"></i>
+                <span>Enrolled Courses</span>
+            </li>
+           
+            <li nz-menu-item style="margin-top:50%">
+                <i nz-icon nzType="logout"></i>
+                <span>Log out</span>
+            </li>
+        </ul>
+
+    </nz-sider>
+
+    <nz-layout>
+        <div class="container" *ngIf="isEnrolledCoursesViewContext">
+            <div class="titleContainer">
+                Enrolled courses
+
+            </div>
+            <div class="card-container" >
+                <app-enrolled-courses></app-enrolled-courses>
+                <app-enrolled-courses></app-enrolled-courses>
+                <app-enrolled-courses></app-enrolled-courses>
+                <app-enrolled-courses></app-enrolled-courses>
+                <app-enrolled-courses></app-enrolled-courses>
+        
+            </div>
+        </div>
+        <div class="profileContainer" *ngIf="isProfileViewContext">
+            <app-profile-update></app-profile-update>
+        </div>
+</nz-layout>
+

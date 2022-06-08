@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardAdminComponent } from './dashboard/dashboard.component';
 
 import { NgZoroModule } from '../ng-zoro.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -21,8 +21,9 @@ import {FullCalendarModule} from "@fullcalendar/angular";
 
 @NgModule({
   declarations: [
+    DashboardAdminComponent,
 
-    DashboardComponent,
+
     TableComponent,
     InstructorsComponent,
     OrganismsComponent,
@@ -41,7 +42,8 @@ import {FullCalendarModule} from "@fullcalendar/angular";
         FormsModule,
         HttpClientModule,
         RouterModule,
-      FullCalendarModule
+      FullCalendarModule,
+
 
 
 
