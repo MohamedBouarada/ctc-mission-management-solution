@@ -46,7 +46,7 @@ registerLocaleData(en);
     declarations: [
         AppComponent,
         LoginComponent,
-        ButtonComponent,
+
         SignupUserComponent,
         SignupOrganismComponent,
 SignupInstructorComponent,
