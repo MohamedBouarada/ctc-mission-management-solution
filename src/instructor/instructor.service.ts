@@ -22,17 +22,17 @@ export class InstructorService {
     private authService: AuthService,
   ) {}
 
-  async create(createInstructorDto: CreateInstructorDto ) {
-
-      createInstructorDto.user.role = RolesEnum.INSTRUCTOR_REQUEST;
-      const savedUser = await this.authService.signup(createInstructorDto.user);
-      const instructor = {
-        startDate: createInstructorDto.startDate,
-        endDate: createInstructorDto.endDate,
-        user: savedUser,
-      };
-      return this.instructorRepository.save(instructor);
-
+  async create(createInstructorDto: CreateInstructorDto) {
+    createInstructorDto.user.role = RolesEnum.INSTRUCTOR_REQUEST;
+    const savedUser = await this.authService.signup(createInstructorDto.user);
+    const instructor = {
+      startDate: createInstructorDto.startDate,
+      endDate: createInstructorDto.endDate,
+      cv: createInstructorDto.cv,
+      professionalImage: createInstructorDto.professionalImage,
+      user: savedUser,
+    };
+    return this.instructorRepository.save(instructor);
   }
 
   async findAll() {
@@ -69,10 +69,7 @@ export class InstructorService {
     return this.instructorRepository.findOne({ where: { id } });
   }
 
-  async update(
-    id: number,
-    updateinstructorDto: UpdateInstructorDto,
-  ) {
+  async update(id: number, updateinstructorDto: UpdateInstructorDto) {
     const instructor = await this.instructorRepository.preload({
       id,
       ...updateinstructorDto,
