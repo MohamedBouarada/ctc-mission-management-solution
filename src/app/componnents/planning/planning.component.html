@@ -13,11 +13,13 @@
     <button class="button mt-2 ms-1">supprimer formation</button>
   </div>
   <div class="card-container" *ngIf="!isCalendarViewContext">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <div class="card-container" *ngFor=" let course of coursesList">
+      <app-enrolled-courses [description]="course.description"
+                            [endDate]="course.endDate"
+                            [startDate]="course.startDate"
+                            [name]="course.name"
+      ></app-enrolled-courses>
+    </div>
+
   </div>
 </div>

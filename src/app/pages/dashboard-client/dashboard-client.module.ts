@@ -20,9 +20,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
   declarations: [
     DashboardComponent,
-      // TableComponent
-      EnrolledCoursesComponent,
-      ProfileUpdateComponent
+    // TableComponent
+    EnrolledCoursesComponent,
+    ProfileUpdateComponent
+  ],
+  exports: [
+    EnrolledCoursesComponent
   ],
   imports: [
     CommonModule,

@@ -14,6 +14,8 @@ import {RouterModule} from "@angular/router";
 import {PlanningComponent} from "../componnents/planning/planning.component";
 import {CardComponent} from "../shared/card/card.component";
 import {FullCalendarModule} from "@fullcalendar/angular";
+import {DashboardClientModule} from "../pages/dashboard-client/dashboard-client.module";
+import { CourseDetailsComponent } from './course-details/course-details.component';
 
 
 
@@ -29,6 +31,7 @@ import {FullCalendarModule} from "@fullcalendar/angular";
     OrganismsComponent,
     PlanningComponent,
     CardComponent,
+    CourseDetailsComponent,
 
 
 
@@ -43,6 +46,7 @@ import {FullCalendarModule} from "@fullcalendar/angular";
         HttpClientModule,
         RouterModule,
       FullCalendarModule,
+      DashboardClientModule
 
 
 
