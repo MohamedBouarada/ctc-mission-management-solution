@@ -51,7 +51,7 @@ registerLocaleData(en);
     SignupUserComponent,
     SignupOrganismComponent,
     SignupInstructorComponent,
-    ProfileUpdateComponent,
+    //ProfileUpdateComponent,
     PlanningComponent,
     FormationComponent,
     CardComponent

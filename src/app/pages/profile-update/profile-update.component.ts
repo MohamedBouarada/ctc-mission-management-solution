@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile-update',
@@ -37,7 +38,7 @@ export class ProfileUpdateComponent implements OnInit {
   submitForm(): void {
     if (this.editForm.valid) {
       console.log('submit', this.validateForm.value);
-      this.http.put('http://localhost:3000/user/edit-profile',{...this.editForm.value}).subscribe(
+      this.http.put(environment.baseApiUrl+'/user/edit-profile',{...this.editForm.value}).subscribe(
         responseData=>{
           console.log(responseData);
           this.successMessage=true;

@@ -4,10 +4,7 @@
             <img src="/assets/Images/medsirat.png" alt="medsirat logo">
         </div>
         <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
-            <li nz-menu-item (click)="swapViewToProfilePage()">
-                <i nz-icon nzType="dashboard"></i>
-                <span>Dashboard </span>
-            </li>
+            
             <li nz-menu-item (click)="swapViewToProfilePage()">
                 <i nz-icon nzType="user"></i>
                 <span>Profile</span>
@@ -44,6 +41,8 @@
         
             </div>
         </div>
-        
+        <div class="profileContainer" *ngIf="isProfileViewContext">
+            <app-profile-update></app-profile-update>
+        </div>
 </nz-layout>
 

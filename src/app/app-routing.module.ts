@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'planning', component: PlanningComponent },
   { path: 'AddEventForm', component: FormationComponent },
   { path: 'signup-instructor', component: SignupInstructorComponent },
-  { path: 'profile-update', component: ProfileUpdateComponent },
+  //{ path: 'profile-update', component: ProfileUpdateComponent },
   { path: 'dashboard-client', component: DashboardComponent },
   {path:'adminDashBoard',component:DashboardAdminComponent}
 ];
