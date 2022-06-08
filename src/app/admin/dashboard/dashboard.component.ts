@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  elementToShow=0;
   constructor() { }
 
   ngOnInit(): void {
+  }
+  handleElementToShow(index:number) {
+    this.elementToShow = index ;
   }
 
 }

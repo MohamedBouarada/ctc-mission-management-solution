@@ -10,6 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InstructorsComponent } from './instructors/instructors.component';
 import { OrganismsComponent } from './organisms/organisms.component';
+import {RouterModule} from "@angular/router";
+import {PlanningComponent} from "../componnents/planning/planning.component";
+import {CardComponent} from "../shared/card/card.component";
+import {FullCalendarModule} from "@fullcalendar/angular";
 
 
 
@@ -22,15 +26,26 @@ import { OrganismsComponent } from './organisms/organisms.component';
     TableComponent,
     InstructorsComponent,
     OrganismsComponent,
+    PlanningComponent,
+    CardComponent,
+
+
+
 
   ],
-  imports: [
-    CommonModule,
-    NgZoroModule,
-    NzLayoutModule,
-    NzTableModule,
-    FormsModule,
-    HttpClientModule
-  ]
+    imports: [
+        CommonModule,
+        NgZoroModule,
+        NzLayoutModule,
+        NzTableModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule,
+      FullCalendarModule
+
+
+
+
+    ]
 })
 export class AdminModule { }

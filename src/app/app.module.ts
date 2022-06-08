@@ -34,33 +34,37 @@ FullCalendarModule.registerPlugins([
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    ButtonComponent,
-    SignupUserComponent,
-    SignupOrganismComponent,
-    PlanningComponent,
-    FormationComponent,
-    CardComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NgZoroModule,
-    NzLayoutModule,
-    NzMenuModule,
-    FullCalendarModule,
-    BrowserModule,
-    HttpClientModule,
-    AdminModule
-  ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        ButtonComponent,
+        SignupUserComponent,
+        SignupOrganismComponent,
+
+        FormationComponent,
+
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NgZoroModule,
+        NzLayoutModule,
+        NzMenuModule,
+        FullCalendarModule,
+        BrowserModule,
+        HttpClientModule,
+        AdminModule,
+
+    ],
+    providers: [{provide: NZ_I18N, useValue: en_US}],
+    exports: [
+
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

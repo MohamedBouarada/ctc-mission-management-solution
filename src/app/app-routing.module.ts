@@ -6,6 +6,7 @@ import { PlanningComponent } from './componnents/planning/planning.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupOrganismComponent } from './pages/signup-organism/signup-organism.component';
 import { SignupUserComponent } from './pages/signup-user/signup-user.component';
+import {TableComponent} from "./admin/users/table.component";
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'signup-organism', component: SignupOrganismComponent },
   { path: 'planning', component: PlanningComponent },
   { path: 'AddEventForm', component: FormationComponent },
-  {path:'adminDashBoard',component:DashboardComponent}
+  {path:'adminDashBoard',component:DashboardComponent }
 ];
 
 @NgModule({

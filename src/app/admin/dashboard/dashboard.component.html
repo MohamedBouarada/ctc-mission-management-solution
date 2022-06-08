@@ -4,7 +4,7 @@
             <img src="/assets/Images/logo.png" alt="medsirat logo">
         </div>
         <ul nz-menu nzTheme="dark" nzMode="inline">
-            <li nz-menu-item>
+            <li nz-menu-item (click)="handleElementToShow(0)">
                 <i nz-icon nzType="dashboard"></i>
                 <span>Dashboard </span>
             </li>
@@ -12,19 +12,19 @@
                 <i nz-icon nzType="user"></i>
                 <span>Admin profile</span>
             </li>
-            <li nz-menu-item>
+            <li nz-menu-item (click)="handleElementToShow(2)">
                 <i nz-icon nzType="user"></i>
                 <span>Users</span>
             </li>
-            <li nz-menu-item>
+            <li nz-menu-item (click)="handleElementToShow(3)">
                 <i nz-icon nzType="user"></i>
                 <span>Instructors</span>
             </li>
-            <li nz-menu-item>
+            <li nz-menu-item (click)="handleElementToShow(4)">
                 <i nz-icon nzType="team"></i>
                 <span>Organisms</span>
             </li>
-            <li nz-menu-item>
+            <li nz-menu-item (click)="handleElementToShow(5)">
                 <i nz-icon nzType="book"></i>
                 <span>Courses</span>
             </li>
@@ -35,21 +35,29 @@
         </ul>
 
     </nz-sider>
-    <!-- <nz-layout>
+
+     <nz-layout *ngIf="elementToShow==2">
         <nz-content>
             <app-table></app-table>
         </nz-content>
-    </nz-layout>  -->
+    </nz-layout>
 
- <!-- <nz-layout>
+  <nz-layout *ngIf="elementToShow==3">
     <nz-content>
       <app-instructors></app-instructors>
     </nz-content>
-  </nz-layout>  -->
+  </nz-layout>
 
-  <nz-layout>
+    <nz-layout *ngIf="elementToShow==4">
     <nz-content>
       <app-organisms></app-organisms>
     </nz-content>
   </nz-layout>
+  <nz-layout *ngIf="elementToShow==5">
+    <nz-content>
+      <app-planning></app-planning>
+    </nz-content>
+  </nz-layout>
 </nz-layout>
+
+
