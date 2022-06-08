@@ -45,6 +45,7 @@ export class CreateCourseDto {
   @IsNumber()
   plannedBy: User;
   @IsNotEmpty()
+  @Type(()=>Number)
   @IsInt()
   @IsPositive()
   placesAvailable: number;
