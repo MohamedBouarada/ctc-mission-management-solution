@@ -8,8 +8,13 @@
   <p class="paragraph">
     {{description.substring(0,50)}}...
   </p>
-  <div class="button-container">
-    <div class="button primary">s'inscrire</div>
+  <div class="button-container" *ngIf="enrollContext==='false'">
+    <div class="button primary">{{inscriptionText}}</div>
     <a href="/course-details/{{id}}" class="button secondary">Plus de details</a>
+
+  </div>
+  <div class="button-container" *ngIf="enrollContext==='true'">
+    <div class="button primary">{{inscriptionText}}</div>
+    <a href="/enroll-details/{{id}}" class="button secondary">Plus de details</a>
   </div>
 </div>

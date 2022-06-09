@@ -18,7 +18,7 @@
                 <span>Enrolled Courses</span>
             </li>
 
-            <li nz-menu-item style="margin-top:50%">
+            <li nz-menu-item style="margin-top:50%" (click)="logout()">
                 <i nz-icon nzType="logout"></i>
                 <span>Log out</span>
             </li>
@@ -32,14 +32,21 @@
                 Enrolled courses
 
             </div>
-            <div class="card-container" >
-                <app-enrolled-courses></app-enrolled-courses>
-                <app-enrolled-courses></app-enrolled-courses>
-                <app-enrolled-courses></app-enrolled-courses>
-                <app-enrolled-courses></app-enrolled-courses>
-                <app-enrolled-courses></app-enrolled-courses>
+          <div *ngIf="authUser.enrolled.length>0">
+            <div class="card-container"  *ngFor="let enroll of authUser.enrolled">
+              <app-enrolled-courses [description]=" 'inscription state : \t' +enroll.state"
+                                    [endDate]="enroll.course.endDate"
+                                    [startDate]="enroll.course.startDate"
+                                    [name]="enroll.course.name"
+                                    [image]="enroll.course.mainImage"
+                                    [id]="enroll.course.id"
+                                    enrollContext="true"
+                                    inscriptionText="désinscrire"
+
+              ></app-enrolled-courses>
 
             </div>
+          </div>
         </div>
     </nz-layout>
   <nz-layout *ngIf="index==0">

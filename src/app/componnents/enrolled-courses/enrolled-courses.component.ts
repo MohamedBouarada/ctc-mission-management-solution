@@ -16,6 +16,9 @@ export class EnrolledCoursesComponent implements OnInit {
   @Input() endDate:string ="";
   @Input() image:string="1uctjeIX5_-mxpEZo0rWKKBWr3gt49GsW";
   @Input() id:string=""
+  @Input() enrollContext='false'
+  @Input() inscriptionText = "s'inscrire"
+
 startDateFormat : String|null ="" ;
 endDateFormat : String|null ="" ;
   constructor( private datePipe:DatePipe) { }

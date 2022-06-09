@@ -12,17 +12,18 @@
           Your profile
         </div>
       </div>
-      <div class="principaleInfos">
-        <img nz-image
-          
-          nzSrc="/assets/Images/mohamed.jpg"
+      <div class="principaleInfos" >
+        <img nz-image *ngIf="authUser.role==='instructor'||authUser.role==='instructor-request'"
+
+          nzSrc="{{image}}"
           alt=""
           class="profileImage"
           style="box-shadow: 0 0 3px rgba(24, 23, 23, 0.473)"
         />
 
-        <div class="name">Mohamed Bouarada</div>
-        <div class="job">Full Stack Developer</div>
+
+        <div class="name">{{authUser.firstName}}  {{authUser.lastName}}</div>
+        <div class="job">{{authUser.role}}</div>
       </div>
 
       <div class="titlesList">
@@ -40,7 +41,7 @@
           <div class="iconContainer">
               <i nz-icon nzType="ellipsis" nzTheme="outline" class="editIcon"></i>
             </div>
-        
+
         </div>
         </div>
       <div class="personalInfo">
@@ -99,57 +100,14 @@
           </nz-form-item>
           <div class="nameAndLastName">
             <nz-form-item class="leftFieldInput">
-              <div class="fieldName">Date Of Birth</div>
+              <div class="fieldName">Phone Number</div>
               <nz-form-control nzErrorTip="Please input your birth date!">
                 <nz-input-group>
-                  <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" formControlName="dateBirth" class="datePicker"></nz-date-picker>
+                  <input nz-input type="text" formControlName="phoneNumber" placeholder="00000000"/>
                  </nz-input-group>
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item class="rightFieldInput">
-              <div class="fieldName">Address</div>
-              <nz-form-control nzErrorTip="Please input your address!">
-                <nz-input-group>
-                  <input
-                    type="text"
-                    nz-input
-                    formControlName="address"
-                    placeholder="Hammamet, centre ville"
-                    class="inputText"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div class="nameAndLastName">
-            <nz-form-item class="leftFieldInput">
-              <div class="fieldName">City</div>
-              <nz-form-control nzErrorTip="Please input your city!">
-                <nz-input-group>
-                  <input
-                    type="text"
-                    nz-input
-                    formControlName="city"
-                    placeholder="Nabeul"
-                    class="inputText"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item class="rightFieldInput">
-              <div class="fieldName">Postal Code</div>
-              <nz-form-control nzErrorTip="Please input your postal code!">
-                <nz-input-group>
-                  <input
-                    type="text"
-                    nz-input
-                    formControlName="postalCode"
-                    placeholder="8050"
-                    class="inputText"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
+
           </div>
           <div nz-row class="login-form-margin"></div>
           <br />
@@ -161,9 +119,9 @@
           >
             {{ textl }}
           </button>
-          
+
           </div>
-          
+
             <div *ngIf="successMessage">
             <nz-alert
               nzType="success"
@@ -242,5 +200,18 @@
         </form>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="authUser.instructor.courses.length>0">
+    <div class="card-container" *ngFor="let course of authUser.instructor.courses">
+      <app-enrolled-courses [description]="course.preview"
+                            [endDate]="course.endDate"
+                            [startDate]="course.startDate"
+                            [name]="course.name"
+                            [image]="course.mainImage"
+                            [id]="course.id"
+      ></app-enrolled-courses>
+    </div>
+
   </div>
 </div>

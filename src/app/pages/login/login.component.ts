@@ -40,9 +40,12 @@ export class LoginComponent implements OnInit {
         responseData=>{
           this.authService.setSession(responseData);
           if(responseData.role==="admin") {
-            this.route.navigate(['/adminDashbBoard'])
+            console.log(responseData.role==="admin")
+             this.route.navigate(['/adminDashBoard'])
+          } else {
+            this.route.navigate(['/dashboard-client'])
+
           }
-          this.route.navigate(['/dashboard-client'])
 
           },
         error => this.errorMessage =  Array.isArray(error.error.message) ? error.error.message[0]:error.error.message
@@ -61,10 +64,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if(this.authService.isLoggedIn()) {
       const role = localStorage.getItem("ctc_mission_auth_role")
+
       if(role && role==="admin") {
         this.route.navigate(["/adminDashboard"])
+      } else {
+        this.route.navigate(["/dashboard-client"])
       }
-      this.route.navigate(["/dashboard-client"])
+
     }
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
