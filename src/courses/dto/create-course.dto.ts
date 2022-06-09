@@ -51,4 +51,6 @@ export class CreateCourseDto {
   placesAvailable: number;
   @IsNotEmpty()
   preview: string;
+  @IsNotEmpty()
+  mainImage:string;
 }
