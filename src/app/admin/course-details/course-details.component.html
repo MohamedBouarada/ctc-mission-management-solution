@@ -7,7 +7,7 @@
             <div class="col-sm-7">
               <div class="card-body">
                 <h5 class="card-title text-primary">{{ coursesDetails.name }}</h5>
-                <p class="mb-4">{{coursesDetails.description}}</p>
+                <p class="mb-4">{{coursesDetails.preview}}</p>
 
                 <a href= "/course-enroll/{{coursesDetails.id}}"   class="btn btn-sm btn-outline-primary">Enroll</a>
               </div>
@@ -30,26 +30,7 @@
           <div class="card-body">
             <div>
               <h3 class="text-center">What will you learn ?</h3>
-              <div class="m-2">
-                <i class="fa-solid fa-fire-flame-simple"></i>
-                Conduct an inferential statistical
-              </div>
-              <div class="m-2">
-                <i class="fa-solid fa-fire-flame-simple"></i>
-                Enhance a data analysis with applied machine learning
-              </div>
-              <div class="m-2">
-                <i class="fa-solid fa-fire-flame-simple"></i>
-                Discern whether a data visualization is good or bad
-              </div>
-              <div class="m-2">
-                <i class="fa-solid fa-fire-flame-simple"></i>
-                Analyze the connectivity of a social network
-              </div>
-              <div class="m-2">
-                <i class="fa-solid fa-fire-flame-simple"></i>
-                Analyze the connectivity of a social network
-              </div>
+              {{coursesDetails.description}}
             </div>
           </div>
         </div>
@@ -112,30 +93,16 @@
     <div class="row">
       <div class="mb-4">
         <div class="card">
-          <div class="d-flex align-items-end row">
+          <div class="d-flex align-items-center row">
             <div class="col-lg-7">
               <div class="card-body">
-                <h5 class="card-title text-primary">
-                  How the Specialization Works
-                </h5>
+                <h2 class="card-title text-primary">
+            About the instructor :
+                </h2>
+
+                <h5> {{coursesDetails.instructedBy.user.firstName}} {{coursesDetails.instructedBy.user.lastName}}</h5>
                 <p class="mb-4">
-                  A Coursera Specialization is a series of courses that helps
-                  you master a skill. To begin, enroll in the Specialization
-                  directly, or review its courses and choose the one you'd like
-                  to start with. When you subscribe to a course that is part of
-                  a Specialization, you’re automatically subscribed to the full
-                  Specialization. It’s okay to complete just one course you can
-                  pause your learning or end your subscription at any time.
-                  Visit your learner dashboard to track your course enrollments
-                  and your progress. Every Specialization includes a hands-on
-                  project. You'll need to successfully finish the project(s) to
-                  complete the Specialization and earn your certificate. If the
-                  Specialization includes a separate course for the hands-on
-                  project, you'll need to finish each of the other courses
-                  before you can start it. When you finish every course and
-                  complete the hands-on project, you'll earn a Certificate that
-                  you can share with prospective employers and your professional
-                  network.
+                  {{coursesDetails.instructedBy.resume}}
                 </p>
               </div>
             </div>

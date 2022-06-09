@@ -27,16 +27,11 @@
       <h1>Enroll last step</h1>
       Please fill the form to complete enrollment
     </div>
-<form nz-form *ngIf="showNext==false" [formGroup]="validateFormNumber" class="login-form" (ngSubmit)="submitFormNumber()">
-<nz-form-item>
-  <nz-form-control nzErrorTip="Please tell us your number?">
-    <nz-input-group>
-      <input type="text" nz-input formControlName="number"  placeholder="Number" />
-    </nz-input-group>
-  </nz-form-control>
-</nz-form-item>
-  <app-button text="Next"></app-button>
-</form>
+    <div>
+      you can add other members to join you on this course or just submit the enroll
+    </div>
+    <app-button [text]="text2" (click)="changeShowNext(!showNext)"></app-button>
+
 
 <form *ngIf="showNext" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
 
@@ -73,10 +68,8 @@
 
       <nz-alert nzType="error" nzMessage="{{errorMessage}}"></nz-alert>
   </div>
-  <div class="login-form_bottom">
-    already have an account ?
-    <a routerLink="/login">log in here</a>
-  </div>
+
 </form>
+    <app-button *ngIf="!showNext" text="ENROLL" (click)="enrollOne()"></app-button>
   </div>
 </div>

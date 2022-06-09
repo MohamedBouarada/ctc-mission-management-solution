@@ -9,8 +9,9 @@ export class DashboardComponent implements OnInit {
   isEnrolledCoursesViewContext: boolean;
   isProfileViewContext: boolean;
   isPlanningViewContext: boolean;
- 
-  
+  index=0;
+
+
   constructor() {
     this.isEnrolledCoursesViewContext = true;
     this.isPlanningViewContext=false;
@@ -19,10 +20,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  swapViewToProfilePage() {
-    this.isEnrolledCoursesViewContext = false;
-    this.isPlanningViewContext=false;
-    this.isProfileViewContext=true;
+  swapView(i:number) {
+    this.index=i;
   }
   swapViewToPlanningPage() {
     this.isEnrolledCoursesViewContext = false;

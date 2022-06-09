@@ -26,6 +26,7 @@ export class CourseDetailsComponent implements OnInit {
     updatedAt:"",
     deletedAt:"",
     mainImage:"",
+    preview:"",
     placesAvailable:"",
     "instructedBy": {
       "createdAt": "",
@@ -33,6 +34,7 @@ export class CourseDetailsComponent implements OnInit {
       "updatedAt": "",
       "id": "",
       "cv": "",
+      "resume" :"",
       "startDate": "",
       "endDate": "",
       professionalImage:"",

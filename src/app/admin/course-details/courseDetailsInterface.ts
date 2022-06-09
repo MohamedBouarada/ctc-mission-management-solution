@@ -14,10 +14,12 @@ export interface ICourseDetails {
   updatedAt:string,
   deletedAt:string,
   "mainImage":string,
+  preview:string;
   "instructedBy": {
     "createdAt": string,
     "deletedAt": string,
     "updatedAt": string,
+    resume:string,
     "id": string,
     "cv": string,
     "startDate": string,

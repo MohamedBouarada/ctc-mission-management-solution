@@ -6,6 +6,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {  MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map, Observable, startWith } from 'rxjs';
+import {environment} from "../../../environments/environment";
 
 export interface Course {
   name: string;
@@ -22,6 +23,7 @@ export class SignupInstructorComponent implements OnInit {
   errorMessage!:string[];
   addOnBlur = true;
   plainFooter = 'plain extra footer';
+  isUserSubscription =true;
 
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -71,9 +73,27 @@ export class SignupInstructorComponent implements OnInit {
     return this.fixedCourses.filter(course => course.toLowerCase().includes(filterValue));
   }
   submitForm(): void {
-    
+console.log(this.validateForm.value)
+   // console.log(this.trainingCourseCtrl)
+    const instructorToSave = {
+        startDate: this.validateForm.value.dates[0],
+      endDate: this.validateForm.value.dates[1],
+      cv : this.validateForm.value.cv,
+      resume:this.validateForm.value.resume,
+      professionalImage: this.validateForm.value.professionalImage,
+      user :{
+          firstName : this.validateForm.value.firstName,
+        lastName : this.validateForm.value.lastName,
+        email:this.validateForm.value.email,
+        cin:this.validateForm.value.cin,
+        phoneNumber:this.validateForm.value.phoneNumber,
+        password:this.validateForm.value.password,
+        repeat_password: this.validateForm.value.cpassword,
+      }
+    }
+    this.http.post(environment.baseApiUrl+"/instructor",instructorToSave).subscribe((response)=>console.log(response))
   }
-  
+
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       firstName: [null, [Validators.required]],
@@ -83,8 +103,17 @@ export class SignupInstructorComponent implements OnInit {
       cin: [null, [Validators.required]],
       password: [null, [Validators.required]],
       cpassword: [null, [Validators.required]],
+      cv : [null,[Validators.required]],
+      dates : [null,[Validators.required]],
+      professionalImage:[null,[Validators.required]],
+      resume:[null,[Validators.required]]
     });
   }
-  
+  showUserSubscription(b:boolean){
+    this.isUserSubscription=b;
+  }
+
+
+
 
 }

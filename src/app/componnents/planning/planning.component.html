@@ -14,10 +14,12 @@
   </div>
   <div class="card-container" *ngIf="!isCalendarViewContext">
     <div class="card-container" *ngFor=" let course of coursesList">
-      <app-enrolled-courses [description]="course.description"
+      <app-enrolled-courses [description]="course.preview"
                             [endDate]="course.endDate"
                             [startDate]="course.startDate"
                             [name]="course.name"
+                            [image]="course.mainImage"
+                            [id]="course.id"
       ></app-enrolled-courses>
     </div>
 

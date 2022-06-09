@@ -20,6 +20,7 @@ import { CourseEnrollConfirmationComponent } from './course-enroll-confirmation/
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "../app-routing.module";
 import {ButtonComponent} from "../shared/button/button.component";
+import {PlanningModule} from "../planning/planning.module";
 
 
 
@@ -32,7 +33,7 @@ import {ButtonComponent} from "../shared/button/button.component";
     TableComponent,
     InstructorsComponent,
     OrganismsComponent,
-    PlanningComponent,
+    //PlanningComponent,
     CardComponent,
     CourseDetailsComponent,
     CourseEnrollConfirmationComponent,
@@ -40,9 +41,10 @@ import {ButtonComponent} from "../shared/button/button.component";
 
 
   ],
-  exports: [
-    ButtonComponent
-  ],
+    exports: [
+        ButtonComponent,
+       // PlanningComponent
+    ],
   imports: [
     CommonModule,
     NgZoroModule,
@@ -51,11 +53,11 @@ import {ButtonComponent} from "../shared/button/button.component";
     FormsModule,
     HttpClientModule,
     RouterModule,
-    FullCalendarModule,
     DashboardClientModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PlanningModule
 
 
   ]

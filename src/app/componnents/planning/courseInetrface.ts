@@ -6,7 +6,9 @@ export interface ICourses {
   description:string;
   address:string;
   capacity:string;
-  price:string
+  price:string;
+  mainImage:string;
+  preview:string;
 }
 
 export interface IGetCoursesResponse {

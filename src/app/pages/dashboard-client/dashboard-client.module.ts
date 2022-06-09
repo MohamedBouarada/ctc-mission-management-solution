@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {AdminModule} from "../../admin/admin.module";
+import {PlanningModule} from "../../planning/planning.module";
 
 
 
@@ -21,11 +23,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   declarations: [
     DashboardComponent,
     // TableComponent
-    EnrolledCoursesComponent,
+   // EnrolledCoursesComponent,
     ProfileUpdateComponent
   ],
   exports: [
-    EnrolledCoursesComponent
+    //EnrolledCoursesComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserModule,
     NzMenuModule,
     MatFormFieldModule,
+    PlanningModule
+
 
 
   ]
