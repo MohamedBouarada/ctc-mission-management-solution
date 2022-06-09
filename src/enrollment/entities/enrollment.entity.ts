@@ -38,12 +38,7 @@ export class Enrollment extends timeStamp {
     default: statesEnum.inProgress,
   })
   state: statesEnum;
-  @Column({
-    type: 'enum',
-    enum: userTypesEnum,
-    default: userTypesEnum.individual,
-  })
-  userType: userTypesEnum;
+
   @Column({ default: 1 })
   size: number;
   @Column({ nullable: true })

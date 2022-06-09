@@ -31,6 +31,7 @@ export class InstructorService {
       cv: createInstructorDto.cv,
       professionalImage: createInstructorDto.professionalImage,
       user: savedUser,
+      resume: createInstructorDto.resume,
     };
     return this.instructorRepository.save(instructor);
   }

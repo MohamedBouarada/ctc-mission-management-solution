@@ -6,21 +6,24 @@ import {
   Param,
   Patch,
   Post,
-  Query,
-} from '@nestjs/common';
+  Query, UseGuards,
+  Request
+} from "@nestjs/common";
 import { UpdateResult } from 'typeorm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import { FindUserDto } from './dto/find-user.dto';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:id')
-  getUser(@Param('id') id: number): Promise<User> {
+  getUser(  @Param('id') id: number): Promise<User> {
     return this.userService.getOneUser(id);
   }
 
@@ -30,11 +33,13 @@ export class UserController {
   }
 
   @Patch('/:id')
+  @UseGuards(JwtAuthGuard)
   updateUser(
+    @Request() req,
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    return this.userService.updateUser(id, updateUserDto);
+    return this.userService.updateUser(req.user.authId, updateUserDto);
   }
   @Patch('/password/:id')
   updateUserPassword(

@@ -14,19 +14,17 @@ import { userTypesEnum } from '../enums/user-types.enum';
 
 export class CreateEnrollmentDto extends timeStamp {
   @IsNotEmpty()
- // @Type(() => Number)
+  // @Type(() => Number)
   //@IsNumber()
   user: User;
   @IsNotEmpty()
-   @Type(() => Number)
-   @IsNumber()
+  @Type(() => Number)
+  @IsNumber()
   course: Course;
   @IsNotEmpty()
-  @IsEnum(statesEnum )
+  @IsEnum(statesEnum)
   state: statesEnum;
-  @IsNotEmpty()
-  @IsEnum(userTypesEnum)
-  userType: userTypesEnum;
+
   @IsOptional()
   @Type(() => Number)
   @IsNumber()

@@ -45,8 +45,10 @@ export class CreateCourseDto {
   @IsNumber()
   plannedBy: User;
   @IsNotEmpty()
-  @Type(()=>Number)
+  @Type(() => Number)
   @IsInt()
   @IsPositive()
   placesAvailable: number;
+  @IsNotEmpty()
+  preview: string;
 }
