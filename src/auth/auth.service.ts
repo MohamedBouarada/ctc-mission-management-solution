@@ -52,6 +52,7 @@ export class AuthService {
     return {
       role: userExists.role,
       token: this.jwtService.sign(payload),
+      expiresIn: 259200,
     };
   }
 
