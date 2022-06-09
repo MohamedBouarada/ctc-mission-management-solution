@@ -18,4 +18,7 @@ export class CreateInstructorDto {
 
   @IsNotEmpty()
   cv: string;
+
+  @IsNotEmpty()
+  resume: string;
 }

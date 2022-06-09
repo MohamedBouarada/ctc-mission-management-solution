@@ -4,9 +4,10 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany, PrimaryColumn,
-  PrimaryGeneratedColumn
-} from "typeorm";
+  OneToMany,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { dummyInstructor } from './dummyInstructor.entity';
 import { dummyManager } from './dummyManger.entity';
 import { Instructor } from '../../instructor/entities/instructor.entity';
@@ -25,7 +26,7 @@ export class Course extends timeStamp {
   endDate: Date;
   @Column()
   address: string;
-  @Column()
+  @Column({type:"text"})
   description: string;
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
@@ -50,9 +51,12 @@ export class Course extends timeStamp {
   mainImage: string;
 
   @JoinColumn()
-  @OneToMany(() => Enrollment, (e) => e.course )
+  @OneToMany(() => Enrollment, (e) => e.course)
   enrollments: Enrollment[];
 
   @Column()
   placesAvailable: number;
+
+  @Column()
+  preview: string;
 }

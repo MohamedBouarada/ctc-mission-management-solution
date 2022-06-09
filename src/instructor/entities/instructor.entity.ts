@@ -13,7 +13,7 @@ export class Instructor extends Timestamp {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
+  @Column({ type: 'text' })
   cv: string;
 
   @Column()
@@ -29,4 +29,7 @@ export class Instructor extends Timestamp {
   })
   @JoinColumn()
   user: User;
+
+  @Column({ type: 'text' })
+  resume: string;
 }
