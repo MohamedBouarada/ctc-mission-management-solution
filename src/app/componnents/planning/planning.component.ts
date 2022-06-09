@@ -17,7 +17,7 @@ export class PlanningComponent implements OnInit {
   isCalendarViewContext: boolean;
   coursesList : ICourses[] = []
  // events:
-
+isAdmin=false;
   calendarOptions: CalendarOptions = {
     headerToolbar: { center: 'dayGridMonth,timeGridWeek,timeGridDay' },
     plugins : [timeGridPlugin],
@@ -42,6 +42,12 @@ export class PlanningComponent implements OnInit {
         console.log(this.coursesList);
       }
     );
+    const role = localStorage.getItem("ctc_mission_auth_role")
+    if(role && role==="admin") {
+      this.isAdmin=true
+    }else {
+      this.isAdmin=false
+    }
   }
 
   handleEventClick(arg: any) {
