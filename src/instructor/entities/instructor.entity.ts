@@ -4,9 +4,11 @@ import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Course } from '../../courses/entities/course.entity';
 
 @Entity()
 export class Instructor extends Timestamp {
@@ -32,4 +34,7 @@ export class Instructor extends Timestamp {
 
   @Column({ type: 'text' })
   resume: string;
+
+  @OneToMany(() => Course, (e) => e.instructedBy)
+  courses: Course[];
 }

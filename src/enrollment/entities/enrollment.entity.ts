@@ -17,7 +17,7 @@ export class Enrollment extends timeStamp {
   @PrimaryGeneratedColumn('increment')
   id: number;
   @JoinColumn()
-  @ManyToOne(() => User, {
+  @ManyToOne(() => User, (e)=>e.enrolled,{
     // TODO: options to review
     eager: true,
     // cascade: ['insert'],

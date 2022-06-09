@@ -26,14 +26,14 @@ export class Course extends timeStamp {
   endDate: Date;
   @Column()
   address: string;
-  @Column({type:"text"})
+  @Column({ type: 'text' })
   description: string;
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
   @Column()
   capacity: number;
   @JoinColumn()
-  @ManyToOne(() => Instructor, {
+  @ManyToOne(() => Instructor, (e) => e.courses, {
     //options to review
     eager: true,
     nullable: true,
