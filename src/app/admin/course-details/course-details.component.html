@@ -9,7 +9,7 @@
                 <h5 class="cardTitle">
                   {{ coursesDetails.name }}
                 </h5>
-                <p class="mb-4">{{ coursesDetails.preview }}</p>
+                <p class="mb-4">{{ coursesDetails.preview }} zdlzkdzl,dl ,l,zld,zldk,zlk, lk,kle,flkze,,dkz,,dlk, k,ekf,ezkd,eklf,ezkd,lkl,k,</p>
 
                 <a href="/course-enroll/{{ coursesDetails.id }}" class="button"
                   >Enroll</a
@@ -146,7 +146,7 @@
 
   <div class="table">
 
-  <div *ngIf="enrollmentId !== null">
+  <div *ngIf="enrollmentId! .length>0">
     <div class="tableTitle">Enrollment Details</div>
     <div class="stateContainer">Enrollment Status :  <span class="state">{{ enrollDetails.state }}</span> </div>
     <div *ngIf="enrollDetails.extraInformations.length > 0">

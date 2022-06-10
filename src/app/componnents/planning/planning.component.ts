@@ -19,6 +19,7 @@ export class PlanningComponent implements OnInit {
  // events:
 isAdmin=false;
   calendarOptions: CalendarOptions = {
+    height:700,
     headerToolbar: { center: 'dayGridMonth,timeGridWeek,timeGridDay' },
     plugins : [timeGridPlugin],
     initialView: 'dayGridMonth',
