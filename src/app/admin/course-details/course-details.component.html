@@ -1,0 +1,138 @@
+<div class="m-5" *ngIf="isDataFetched">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="mb-4">
+        <div class="card">
+          <div class="d-flex align-items-end row">
+            <div class="col-sm-7">
+              <div class="card-body">
+                <h5 class="cardTitle">
+                  {{ coursesDetails.name }}
+                </h5>
+                <p class="mb-4">{{ coursesDetails.preview }}</p>
+
+                <a
+                  href="/course-enroll/{{ coursesDetails.id }}"
+                  class="button"
+                  >Enroll</a
+                >
+              </div>
+            </div>
+            <div class="col-sm-5 text-center text-sm-left">
+              <div class="card-body pb-0 px-0 px-md-4">
+                <img
+                  src="https://drive.google.com/uc?export=view&id={{
+                    coursesDetails.mainImage
+                  }}"
+                  height="140"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 mb-4">
+        <div class="card">
+          <h5 class="card-header m-0">About the course</h5>
+
+          <div class="card-body">
+            <div>
+              <h3 class="text-center">What will you learn ?</h3>
+              {{ coursesDetails.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="row">
+          <div class="col-lg-6 col-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-calendar-days m-2"></i>Date debut
+
+                <h3 class="card-title mb-2">{{ startDateFormat }}</h3>
+                <small class="text-success fw-semibold"
+                  ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-calendar-days m-2"></i>Date fin
+
+                <h3 class="card-title mb-2">{{ endDateFormat }}</h3>
+                <small class="text-success fw-semibold"
+                  ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-location-dot m-2"></i>Adresse
+
+                <h3 class="card-title mb-2">{{ coursesDetails.address }}</h3>
+                <small class="text-success fw-semibold"
+                  ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-tag m-2"></i>places restantes
+
+                <h3 class="card-title mb-2">
+                  {{ coursesDetails.placesAvailable }}
+                </h3>
+                <small class="text-success fw-semibold"
+                  ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-4">
+        <div class="card">
+          <div class="d-flex align-items-center row">
+            <div class="col-lg-7">
+              <div class="card-body">
+                <h2 class="card-title text-primary">About the instructor :</h2>
+
+                <h5>
+                  {{ coursesDetails.instructedBy.user.firstName }}
+                  {{ coursesDetails.instructedBy.user.lastName }}
+                </h5>
+                <p class="mb-4">
+                  {{ coursesDetails.instructedBy.resume }}
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-5 text-center text-md-left">
+              <div class="card-body pb-0 px-0 px-md-4 m-2">
+                <img
+                  src="https://drive.google.com/uc?export=view&id={{
+                    coursesDetails.instructedBy.professionalImage
+                  }}"
+                  height="280"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,8 @@ import { SignupOrganismComponent } from './pages/signup-organism/signup-organism
 import { SignupUserComponent } from './pages/signup-user/signup-user.component';
 import { SignupInstructorComponent } from './pages/signup-instructor/signup-instructor.component';
 import { DashboardComponent } from './pages/dashboard-client/dashboard/dashboard.component';
+import {CourseDetailsComponent} from "./admin/course-details/course-details.component";
+import {CourseEnrollConfirmationComponent} from "./admin/course-enroll-confirmation/course-enroll-confirmation.component";
 
 
 const routes: Routes = [
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path:'adminDashBoard',component:DashboardAdminComponent },
   { path: 'signup-instructor', component: SignupInstructorComponent },
   { path: 'dashboard-client', component: DashboardComponent },
+  {path:"course-details/:id" , component:CourseDetailsComponent},
+  {path:"course-enroll/:courseId" , component:CourseEnrollConfirmationComponent}
 ];
 
 @NgModule({

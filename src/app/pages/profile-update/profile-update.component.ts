@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import {ProfileUpdateInterface} from "./profile-update.interface";
 
 @Component({
   selector: 'app-profile-update',
@@ -16,29 +17,43 @@ export class ProfileUpdateComponent implements OnInit {
   date="13/10/2000";
   successMessage=false;
   errorMessage!:string[];
+  image="/assets/Images/profile-placeholder.png"
+  placeholder="/assets/Images/profile-placeholder.png"
 
-  editForm= new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-    dateBirth: new FormControl(''),
-    city: new FormControl(''),
-    address: new FormControl(''),
-    postalCode: new FormControl(''),
+  authUser:ProfileUpdateInterface = {
+    firstName:"",
+    lastName:"",
+    email:"",
+    cin:"",
+    phoneNumber:"",
+    role:"",
+    profileImage:"",
+    id:"",
+    instructor: {
+      professionalImage:"",
+      resume:"",
+      cv:"",
+      startDate:"",
+      endDate:"",
+      courses:[],
+    },
+    enrolled:[]
 
-  });
-  passwordForm=new FormGroup({
+  }
 
-  })
-  constructor(private fb: FormBuilder,private http:HttpClient) {}
+
+  constructor(private fb: FormBuilder,private http:HttpClient ) {}
   onChange(result: Date): void {
     console.log('onChange: ', result);
   }
 
   submitForm(): void {
-    if (this.editForm.valid) {
+    if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-      this.http.put(environment.baseApiUrl+'/user/edit-profile',{...this.editForm.value}).subscribe(
+const token = localStorage.getItem("ctc_mission_auth_token")
+      this.http.patch(environment.baseApiUrl+'/user',{...this.validateForm.value},{headers:{
+        "Authorization" : "bearer "+token,
+        }}).subscribe(
         responseData=>{
           console.log(responseData);
           this.successMessage=true;
@@ -64,31 +79,44 @@ export class ProfileUpdateComponent implements OnInit {
   ngOnInit(): void {
 
     //changer validateForm par editForm in html pour le form 1 et par editFormPassword pour le form 2
-    
 
-    // this.http.get('http://localhost:3000/user').subscribe(
-    //   responseData=>{
-    //     console.log(responseData);
-    //     this.successMessage=true;
-    //     this.editForm = new FormGroup({
-    //       firstName: new FormControl(responseData['firstName']),
-    //       lastName: new FormControl(responseData['lastName']),
-    //       email: new FormControl(responseData['email']),
-    //       dateBirth: new FormControl(responseData['dateBirth']),
-    //       city: new FormControl(responseData['city']),
-    //       address: new FormControl(responseData['address']),
-    //       postalCode: new FormControl(responseData['postalCode']),
-    //     });
-    //   },
-    //   error=>{
-    //     console.log(error);
-    //     this.errorMessage=error.error.message;
-    //     console.log(this.errorMessage);}
-    // );
+const token = localStorage.getItem("ctc_mission_auth_token")
+    this.http.get<ProfileUpdateInterface>('http://localhost:3000/user/one',{headers:{
+      "Authorization" : "bearer "+token
+      }}).subscribe(
+      responseData => {
+        console.log(responseData);
+        this.successMessage = true;
+        this.validateForm = new FormGroup({
+          firstName: new FormControl(responseData['firstName']),
+          lastName: new FormControl(responseData['lastName']),
+          email: new FormControl(responseData['email']),
+          phoneNumber : new FormControl(responseData.phoneNumber)
 
+        });
+        this.authUser = responseData
+        this.image = responseData.role==='instructor' || responseData.role=='instructor-request' ? 'https://drive.google.com/uc?export=view&id='+responseData.instructor.professionalImage : responseData.profileImage &&responseData.profileImage.length>0? 'https://drive.google.com/uc?export=view&id='+responseData.profileImage:this.placeholder
+        console.log(this.image)
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        console.log(this.errorMessage);
+      }
+    );
+
+    this.validateForm = this.fb.group({
+      firstName: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      phoneNumber: [null, [Validators.required]],
+      cin: [null, [Validators.required]],
+    })
+
+  }
 
     //supprimer ce validate form apres avoir fixé les 2 autres formGroup
-    this.validateForm = this.fb.group({
+  /*  this.validateForm = this.fb.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       email: [null, [Validators.required]],
@@ -97,6 +125,8 @@ export class ProfileUpdateComponent implements OnInit {
       password: [null, [Validators.required]],
       cpassword: [null, [Validators.required]],
     });
-  }
+
+   */
+
 
 }

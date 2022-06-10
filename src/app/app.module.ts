@@ -33,6 +33,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { DashboardClientModule } from './pages/dashboard-client/dashboard-client.module';
 
 import { AdminModule } from './admin/admin.module';
+import {PlanningModule} from "./planning/planning.module";
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -46,7 +47,7 @@ registerLocaleData(en);
     declarations: [
         AppComponent,
         LoginComponent,
-        ButtonComponent,
+
         SignupUserComponent,
         SignupOrganismComponent,
 SignupInstructorComponent,
@@ -76,7 +77,8 @@ SignupInstructorComponent,
     MatAutocompleteModule,
     NzDatePickerModule,
     DashboardClientModule,
-    AdminModule
+    AdminModule,
+    PlanningModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
