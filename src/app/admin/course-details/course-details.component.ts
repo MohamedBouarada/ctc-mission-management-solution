@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CourseDetailsServiceService} from "./course-details-service.service";
 import {map} from "rxjs/operators";
-import {ICourseDetails} from "./courseDetailsInterface";
+import {ICourseDetails, IEnrollment} from "./courseDetailsInterface";
 import {ActivatedRoute} from "@angular/router";
 import {DatePipe} from "@angular/common";
 
@@ -57,13 +57,21 @@ export class CourseDetailsComponent implements OnInit {
     }
   } ;
   courseId : string|null="";
+  enrollmentId :string|null = "";
   isDataFetched = false;
    startDateFormat :string|null="";
    endDateFormat :string|null="";
+   enrollDetails :IEnrollment = {
+     id:"",
+     state : "",
+     penalization:"",
+     extraInformations :  [],
+   }
   constructor( private courseDetailsService:CourseDetailsServiceService,private route:ActivatedRoute,private datePipe:DatePipe) { }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id');
+    this.enrollmentId = this.route.snapshot.paramMap.get('enrollmentId');
     this.courseDetailsService.getCourseDetails(this.courseId).pipe(map(
       (responseData)=>{
         console.log(responseData)
@@ -78,6 +86,18 @@ export class CourseDetailsComponent implements OnInit {
         console.log(this.coursesDetails);
       }
     );
+
+    if(this.enrollmentId){
+      this.courseDetailsService.getEnrollmentDetails(this.enrollmentId).pipe(map(
+        response=>response
+      )).subscribe(
+        enroll =>this.enrollDetails = enroll,
+      )
+    }
+  }
+
+  cancelEnrollment(){
+
   }
 
 }

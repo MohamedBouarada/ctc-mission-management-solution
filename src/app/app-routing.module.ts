@@ -22,8 +22,9 @@ const routes: Routes = [
   {path:'adminDashBoard',component:DashboardAdminComponent },
   { path: 'signup-instructor', component: SignupInstructorComponent },
   { path: 'dashboard-client', component: DashboardComponent },
-  {path:"course-details/:id" , component:CourseDetailsComponent},
-  {path:"course-enroll/:courseId" , component:CourseEnrollConfirmationComponent}
+  {path:"course-details/:id/" , component:CourseDetailsComponent},
+  {path:"course-enroll/:courseId" , component:CourseEnrollConfirmationComponent},
+  {path:"enroll-details/:id/:enrollmentId" , component:CourseDetailsComponent}
 ];
 
 @NgModule({

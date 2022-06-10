@@ -116,5 +116,34 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="enrollmentId!==null">
+    <h1>Enrollment Details</h1>
+    <div> Enrollment Status : {{enrollDetails.state}}</div>
+    <div *ngIf="enrollDetails.extraInformations.length>0">
+      <div>
+        <h2> other users</h2>
+        <nz-table #basicTable [nzData]="enrollDetails.extraInformations">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{data.fullName}}</td>
+            <td>{{data.email}}</td>
+
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div>
+        <app-button text="CANCEL ENROLLMENT" (click)="cancelEnrollment()"></app-button>
+      </div>
+    </div>
+  </div>
 </div>
 

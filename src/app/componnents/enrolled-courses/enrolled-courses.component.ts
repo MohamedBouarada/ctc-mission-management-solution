@@ -18,6 +18,7 @@ export class EnrolledCoursesComponent implements OnInit {
   @Input() id:string=""
   @Input() enrollContext='false'
   @Input() inscriptionText = "s'inscrire"
+  @Input() enrollmentId=""
 
 startDateFormat : String|null ="" ;
 endDateFormat : String|null ="" ;
