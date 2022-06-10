@@ -116,7 +116,7 @@ export class CourseEnrollConfirmationComponent implements OnInit {
 
       }
       const enrollment = {
-        user :2,
+        user :1,
         course: this.courseId,
         extraInformations:newArr,
         state:"inProgress",

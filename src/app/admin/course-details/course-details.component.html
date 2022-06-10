@@ -11,9 +11,7 @@
                 </h5>
                 <p class="mb-4">{{ coursesDetails.preview }}</p>
 
-                <a
-                  href="/course-enroll/{{ coursesDetails.id }}"
-                  class="button"
+                <a href="/course-enroll/{{ coursesDetails.id }}" class="button"
                   >Enroll</a
                 >
               </div>
@@ -25,6 +23,7 @@
                     coursesDetails.mainImage
                   }}"
                   height="140"
+                  class="courseImage"
                 />
               </div>
             </div>
@@ -33,69 +32,75 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-lg-8 mb-4">
-        <div class="card">
-          <h5 class="card-header m-0">About the course</h5>
+    <div class="secondRow">
+      <div class="row">
+        <div class="col-lg-8 mb-4">
+          <div class="card">
+            <h5 class="card-header m-0">
+              <div class="aboutTheCourse">About the course</div>
+            </h5>
 
-          <div class="card-body">
-            <div>
-              <h3 class="text-center">What will you learn ?</h3>
-              {{ coursesDetails.description }}
+            <div class="card-body">
+              <div>
+                <h3 class="text-center">
+                  <div class="aboutTheCourse">What will you learn ?</div>
+                </h3>
+                {{ coursesDetails.description }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-lg-4">
-        <div class="row">
-          <div class="col-lg-6 col-6 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <i class="fa-solid fa-calendar-days m-2"></i>Date debut
+        <div class="col-lg-4">
+          <div class="row">
+            <div class="col-lg-6 col-6 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <i class="fa-solid fa-calendar-days m-2"></i>Date debut
 
-                <h3 class="card-title mb-2">{{ startDateFormat }}</h3>
-                <small class="text-success fw-semibold"
-                  ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
-                >
+                  <h3 class="card-title mb-2">{{ startDateFormat }}</h3>
+                  <small class="text-success fw-semibold"
+                    ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
+                  >
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-6 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <i class="fa-solid fa-calendar-days m-2"></i>Date fin
+            <div class="col-lg-6 col-6 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <i class="fa-solid fa-calendar-days m-2"></i>Date fin
 
-                <h3 class="card-title mb-2">{{ endDateFormat }}</h3>
-                <small class="text-success fw-semibold"
-                  ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
-                >
+                  <h3 class="card-title mb-2">{{ endDateFormat }}</h3>
+                  <small class="text-success fw-semibold"
+                    ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
+                  >
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-6 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <i class="fa-solid fa-location-dot m-2"></i>Adresse
+            <div class="col-lg-6 col-6 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <i class="fa-solid fa-location-dot m-2"></i>Adresse
 
-                <h3 class="card-title mb-2">{{ coursesDetails.address }}</h3>
-                <small class="text-success fw-semibold"
-                  ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
-                >
+                  <h3 class="card-title mb-2">{{ coursesDetails.address }}</h3>
+                  <small class="text-success fw-semibold"
+                    ><i class="bx bx-up-arrow-alt"></i> +72.80%</small
+                  >
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-6 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <i class="fa-solid fa-tag m-2"></i>places restantes
+            <div class="col-lg-6 col-6 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <i class="fa-solid fa-tag m-2"></i>places restantes
 
-                <h3 class="card-title mb-2">
-                  {{ coursesDetails.placesAvailable }}
-                </h3>
-                <small class="text-success fw-semibold"
-                  ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
-                >
+                  <h3 class="card-title mb-2">
+                    {{ coursesDetails.placesAvailable }}
+                  </h3>
+                  <small class="text-success fw-semibold"
+                    ><i class="bx bx-up-arrow-alt"></i> 30.80%</small
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -109,11 +114,13 @@
           <div class="d-flex align-items-center row">
             <div class="col-lg-7">
               <div class="card-body">
-                <h2 class="card-title text-primary">About the instructor :</h2>
+                <h2 class="instructorTitle">About the instructor :</h2>
 
                 <h5>
-                  {{ coursesDetails.instructedBy.user.firstName }}
-                  {{ coursesDetails.instructedBy.user.lastName }}
+                  <div class="nameLastName">
+                    {{ coursesDetails.instructedBy.user.firstName }}
+                    {{ coursesDetails.instructedBy.user.lastName }}
+                  </div>
                 </h5>
                 <p class="mb-4">
                   {{ coursesDetails.instructedBy.resume }}
@@ -126,7 +133,7 @@
                   src="https://drive.google.com/uc?export=view&id={{
                     coursesDetails.instructedBy.professionalImage
                   }}"
-                  height="280"
+                  class="instructorImage"
                 />
               </div>
             </div>
@@ -135,4 +142,50 @@
       </div>
     </div>
   </div>
+
+
+  <div class="table">
+
+  <div *ngIf="enrollmentId !== null">
+    <div class="tableTitle">Enrollment Details</div>
+    <div class="stateContainer">Enrollment Status :  <span class="state">{{ enrollDetails.state }}</span> </div>
+    <div *ngIf="enrollDetails.extraInformations.length > 0">
+      <div class="tableContent">
+        <h2>other users</h2>
+        <nz-table #basicTable [nzData]="enrollDetails.extraInformations">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td>{{ data.fullName }}</td>
+              <td>{{ data.email }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div>
+        <div class="cancelButtonContainer">
+          <button
+          nz-button
+          class="cancelButton"
+          [nzType]="'primary'"
+          (click)="cancelEnrollment()"
+        >
+          Cancel Enrollment
+        </button>
+  
+        </div>
+        <!-- <app-button
+          text="CANCEL ENROLLMENT"
+          (click)="cancelEnrollment()"
+        ></app-button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>

@@ -45,3 +45,10 @@ export interface ICourseDetails {
   }
 
 }
+
+export interface IEnrollment {
+  id:string,
+  state : string,
+  penalization:string,
+  extraInformations : {fullName:string,email:string} [],
+}

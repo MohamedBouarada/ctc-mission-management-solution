@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="principaleInfos" >
-        <img nz-image *ngIf="authUser.role==='instructor'||authUser.role==='instructor-request'"
+        <img nz-image
 
           nzSrc="{{image}}"
           alt=""
@@ -213,5 +213,25 @@
       ></app-enrolled-courses>
     </div>
 
+  </div>
+
+  <div *ngIf="adminContext">
+    <div *ngIf="authUser.enrolled.length>0" class="card-container">
+
+      <div *ngFor="let enroll of authUser.enrolled">
+      <app-enrolled-courses [description]=" 'inscription state : \t' +enroll.state"
+                            [endDate]="enroll.course.endDate"
+                            [startDate]="enroll.course.startDate"
+                            [name]="enroll.course.name"
+                            [image]="enroll.course.mainImage"
+                            [id]="enroll.course.id"
+                            enrollContext="true"
+                            inscriptionText="désinscrire"
+                            [enrollmentId]="enroll.id"
+
+      ></app-enrolled-courses>
+      </div>
+
+    </div>
   </div>
 </div>

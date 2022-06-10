@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import {ProfileUpdateInterface} from "./profile-update.interface";
@@ -19,6 +19,7 @@ export class ProfileUpdateComponent implements OnInit {
   errorMessage!:string[];
   image="/assets/Images/profile-placeholder.png"
   placeholder="/assets/Images/profile-placeholder.png"
+  @Input() adminContext=false;
 
   authUser:ProfileUpdateInterface = {
     firstName:"",
@@ -40,6 +41,8 @@ export class ProfileUpdateComponent implements OnInit {
     enrolled:[]
 
   }
+
+  @Input() userId=""
 
 
   constructor(private fb: FormBuilder,private http:HttpClient ) {}
@@ -79,9 +82,12 @@ const token = localStorage.getItem("ctc_mission_auth_token")
   ngOnInit(): void {
 
     //changer validateForm par editForm in html pour le form 1 et par editFormPassword pour le form 2
-
+    console.log(this.userId)
 const token = localStorage.getItem("ctc_mission_auth_token")
-    this.http.get<ProfileUpdateInterface>('http://localhost:3000/user/one',{headers:{
+    const url =String( this.userId).length>0? environment.baseApiUrl+ '/user/one/'+ this.userId : environment.baseApiUrl+'/user/one';
+    console.log(url)
+    console.log( typeof this.userId)
+    this.http.get<ProfileUpdateInterface>(url,{headers:{
       "Authorization" : "bearer "+token
       }}).subscribe(
       responseData => {

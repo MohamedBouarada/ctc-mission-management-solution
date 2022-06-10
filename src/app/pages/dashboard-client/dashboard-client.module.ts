@@ -26,9 +26,10 @@ import {PlanningModule} from "../../planning/planning.module";
    // EnrolledCoursesComponent,
     ProfileUpdateComponent
   ],
-  exports: [
-    //EnrolledCoursesComponent
-  ],
+    exports: [
+        ProfileUpdateComponent,
+        //EnrolledCoursesComponent
+    ],
   imports: [
     CommonModule,
     NgZoroModule,
