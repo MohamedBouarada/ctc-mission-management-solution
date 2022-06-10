@@ -2,8 +2,9 @@ import { IsEmail, IsNumber, IsPositive, MinLength } from "class-validator";
 import { Timestamp } from 'src/generics/timestamp.entity';
 import { Instructor } from 'src/instructor/entities/instructor.entity';
 import { Organism } from 'src/organism/entities/organism.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { RolesEnum } from '../enums/roles.enum';
+import { Enrollment } from "../../enrollment/entities/enrollment.entity";
 
 @Entity()
 export class User extends Timestamp {
@@ -54,6 +55,9 @@ export class User extends Timestamp {
 
   @OneToOne(() => Instructor, (instructor) => instructor.user)
   instructor: Instructor;
+
+  @OneToMany(()=>Enrollment , (e)=>e.user )
+  enrolled :Enrollment[]
   
 
 }

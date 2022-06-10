@@ -7,14 +7,14 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto, UpdateUserDtoAll } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { FindUserDto } from './dto/find-user.dto';
 import * as bcrypt from 'bcrypt';
 import { hashPassword } from 'src/shared/hash-password';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 import { MailService } from '../mail/mail.service';
-import { ConfigService } from "@nestjs/config";
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
@@ -24,7 +24,7 @@ export class UserService {
   ) {}
 
   async getOneUser(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({ where: { id }  ,relations:['instructor','instructor.courses' ,'enrolled']});
     if (user) {
       return user;
     }
@@ -83,7 +83,7 @@ export class UserService {
     const { repeat_password, ...userToSave } = createUserDto;
     const result = await this.userRepository.save(userToSave);
     delete result.password;
-     this.mailService.sendUserCreateAccount(
+    this.mailService.sendUserCreateAccount(
       createUserDto.firstName,
       createUserDto.lastName,
       createUserDto.email,
@@ -91,33 +91,19 @@ export class UserService {
     return result;
   }
 
-  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    const user = await this.userRepository.findOne(id);
+  async updateUser(id: number, updateUserDto: UpdateUserDtoAll): Promise<User> {
+    // const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.preload({ id, ...updateUserDto });
     if (!user) {
       throw new NotFoundException(`user with id ${id} does not exist`);
     }
-    const isEqualPassword = await bcrypt.compare(
-      updateUserDto.confirmationPassword,
-      user.password,
-    );
-    if (!isEqualPassword) {
-      throw new BadRequestException(`Passwords do not match`);
-    }
-    delete updateUserDto.confirmationPassword;
+    return await this.userRepository.save(user)
     /* if (updateUserDto.password) {
       updateUserDto.password = await hashPassword(updateUserDto.password);
     }
 
     */
-    const updatedUser = { ...user, ...updateUserDto };
-    try {
-      const result = await this.userRepository.save(updatedUser);
-      delete result.password;
-      delete result.deletedAt;
-      return result;
-    } catch (err) {
-      throw new ConflictException(`Email Or Phone number already exist`);
-    }
+
   }
 
   async updateUserPassword(
