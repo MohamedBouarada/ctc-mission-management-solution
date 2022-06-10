@@ -8,7 +8,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardAdminComponent implements OnInit {
-  elementToShow=0;
+  elementToShow=2;
+  isShowUser=false;
+  adminContext=true;
 
   constructor(private authService:AuthService , private router:Router) { }
 
@@ -18,6 +20,8 @@ export class DashboardAdminComponent implements OnInit {
     }
   }
   handleElementToShow(index:number) {
+    this.isShowUser = false;
+
     this.elementToShow = index ;
   }
   logout(){

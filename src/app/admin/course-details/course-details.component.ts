@@ -67,6 +67,7 @@ export class CourseDetailsComponent implements OnInit {
      penalization:"",
      extraInformations :  [],
    }
+
   constructor( private courseDetailsService:CourseDetailsServiceService,private route:ActivatedRoute,private datePipe:DatePipe) { }
 
   ngOnInit(): void {

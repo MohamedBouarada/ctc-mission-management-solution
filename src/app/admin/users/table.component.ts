@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { map } from 'rxjs/operators';
 import { UsersTableService } from './users-table.service';
 import { IUsers } from './usersInterface';
@@ -20,6 +20,9 @@ export class TableComponent implements OnInit {
   i = 0;
   editId: string | null = null;
   listOfData: IUsers[] = [];
+  showUserDetails="";
+   isShowUser=false;
+   @Input() adminContext=false
 
 
 constructor(private usersTable:UsersTableService){}
@@ -33,6 +36,7 @@ constructor(private usersTable:UsersTableService){}
   }
 
   ngOnInit(): void {
+  console.log(this.isShowUser)
    this.usersTable.getUsers().pipe(map(
      (responseData)=>{
       console.log(responseData)
@@ -45,6 +49,16 @@ constructor(private usersTable:UsersTableService){}
     }
    );
   }
+  doNotShowUserDetails(){
+  this.isShowUser=false
+  }
+  showUserInfos( id:string){
+  console.log(id)
+   this.showUserDetails=id;
+  this.isShowUser=true
+  }
+
+
   }
 
 

@@ -1,8 +1,9 @@
 
-<button nz-button nzType="primary">Add User</button>
+<button nz-button nzType="primary" *ngIf="isShowUser" (click)="doNotShowUserDetails()">Go Back</button>
+<button nz-button nzType="primary" *ngIf="!isShowUser" >Add user</button>
 <br />
 <br />
-<nz-table #editRowTable nzBordered [nzData]="listOfData">
+<nz-table #editRowTable nzBordered [nzData]="listOfData" *ngIf="!isShowUser">
     <thead>
         <tr>
             <th>First Name</th>
@@ -19,9 +20,13 @@
             <td>{{data.email}}</td>
             <td>{{ data.phoneNumber }}</td>
             <td>
-                <a nz-button nzType="link" nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
-                <a nz-button nzType="link">Edit</a>
+              <a nz-button nzType="link"><i nz-icon nzType="info-circle" nzTheme="outline" (click)="showUserInfos(data.id)"></i></a>
+              <a nz-button nzType="link" nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
             </td>
         </tr>
     </tbody>
 </nz-table>
+
+<nz-layout *ngIf="isShowUser">
+    <app-profile-update [adminContext]="adminContext" [userId]="showUserDetails"></app-profile-update>
+</nz-layout>

@@ -103,6 +103,17 @@
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your nature!">
+          <nz-select
+            id="nature"
+            formControlName="instructedBy"
+            nzPlaceHolder="Instructor">
+            <nz-option *ngFor=" let i of instructorsAvailable" nzValue='{{i.id}}' nzLabel='{{i.user.firstName}} {{i.user.lastName}}'></nz-option>
+
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
 
       <div nz-row class="AddCourse-form-margin"></div>
       <br />
