@@ -9,7 +9,7 @@
                 <h5 class="cardTitle">
                   {{ coursesDetails.name }}
                 </h5>
-                <p class="mb-4">{{ coursesDetails.preview }} zdlzkdzl,dl ,l,zld,zldk,zlk, lk,kle,flkze,,dkz,,dlk, k,ekf,ezkd,eklf,ezkd,lkl,k,</p>
+                <p class="mb-4">{{ coursesDetails.preview }} </p>
 
                 <a href="/course-enroll/{{ coursesDetails.id }}" class="button"
                   >Enroll</a
@@ -146,10 +146,11 @@
 
   <div class="table">
 
-  <div *ngIf="enrollmentId! .length>0">
+  <div *ngIf=" enrollmentId && enrollmentId.length>0">
     <div class="tableTitle">Enrollment Details</div>
     <div class="stateContainer">Enrollment Status :  <span class="state">{{ enrollDetails.state }}</span> </div>
-    <div *ngIf="enrollDetails.extraInformations.length > 0">
+    <div class="stateContainer">cancel penalty:  <span class="state">{{ penaltyMessage }}</span> </div>
+    <div *ngIf="enrollDetails.extraInformations &&enrollDetails.extraInformations.length > 0">
       <div class="tableContent">
         <h2>other users</h2>
         <nz-table #basicTable [nzData]="enrollDetails.extraInformations">
@@ -168,27 +169,38 @@
         </nz-table>
       </div>
 
-      <div>
-        <div class="cancelButtonContainer">
-          <div>
-            <app-button text="CONFIRM ENROLLMENT" (click)="confirmEnrollment()"></app-button>
-          </div>
-          <button
-          nz-button
-          class="cancelButton"
-          [nzType]="'primary'"
-          (click)="cancelEnrollment()"
-        >
-          Cancel Enrollment
-        </button>
-
-        </div>
-        <!-- <app-button
-          text="CANCEL ENROLLMENT"
-          (click)="cancelEnrollment()"
-        ></app-button> -->
-      </div>
+      
     </div>
+    <div>
+      <div class="cancelButtonContainer">
+        <button
+        nz-button
+        class="cancelButton"
+        [nzType]="'primary'"
+        (click)="confirmEnrollment()"
+      >
+        Confirm Enrollment
+      </button>
+      <br>
+        <!-- <div>
+          <app-button text="CONFIRM ENROLLMENT" (click)="confirmEnrollment()"></app-button>
+        </div> -->
+        <button
+        nz-button
+        class="cancelButton"
+        [nzType]="'primary'"
+        (click)="cancelEnrollment()"
+      >
+        Cancel Enrollment
+      </button>
+
+      </div>
+      <!-- <app-button
+        text="CANCEL ENROLLMENT"
+        (click)="cancelEnrollment()"
+      ></app-button> -->
+    </div>
+
   </div>
 </div>
 

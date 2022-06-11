@@ -204,13 +204,14 @@
     </div>
   </div>
 
-  <div *ngIf="authUser.instructor.courses.length>0">
+  <div *ngIf="authUser.instructor && authUser.instructor.courses.length>0">
     <div class="titleContainer">
       Course To Teach
 
   </div>
     
-    <div class="card-container" *ngFor="let course of authUser.instructor.courses">
+    <div class="card-container" >
+      <div *ngFor="let course of authUser.instructor.courses"> 
       <app-enrolled-courses [description]="course.preview"
                             [endDate]="course.endDate"
                             [startDate]="course.startDate"
@@ -219,15 +220,17 @@
                             [id]="course.id"
       ></app-enrolled-courses>
     </div>
+  </div>
 
   </div>
 
   <div *ngIf="adminContext">
+    <div class="titleContainer" *ngIf="authUser.enrolled.length>0">
+      Enrolled courses
+ 
+   </div>
     <div *ngIf="authUser.enrolled.length>0" class="card-container">
-      <div class="titleContainer">
-       Enrolled courses
-  
-    </div>
+     
       <div *ngFor="let enroll of authUser.enrolled">
       <app-enrolled-courses [description]=" 'inscription state : \t' +enroll.state"
                             [endDate]="enroll.course.endDate"

@@ -74,6 +74,7 @@ export class CourseDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id');
     this.enrollmentId = this.route.snapshot.paramMap.get('enrollmentId');
+    console.log(this.enrollmentId);
     this.courseDetailsService.getCourseDetails(this.courseId).pipe(map(
       (responseData)=>{
         console.log(responseData)
