@@ -120,6 +120,7 @@
   <div *ngIf="enrollmentId!==null">
     <h1>Enrollment Details</h1>
     <div> Enrollment Status : {{enrollDetails.state}}</div>
+    <div>  {{penaltyMessage}}</div>
     <div *ngIf="enrollDetails.extraInformations.length>0">
       <div>
         <h2> other users</h2>
@@ -139,6 +140,9 @@
           </tr>
           </tbody>
         </nz-table>
+      </div>
+      <div>
+        <app-button text="CONFIRM ENROLLMENT" (click)="confirmEnrollment()"></app-button>
       </div>
       <div>
         <app-button text="CANCEL ENROLLMENT" (click)="cancelEnrollment()"></app-button>

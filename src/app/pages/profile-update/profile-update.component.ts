@@ -53,8 +53,9 @@ export class ProfileUpdateComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+      const url = String( this.userId).length>0? environment.baseApiUrl+'/user/'+this.userId: environment.baseApiUrl+'/user'
 const token = localStorage.getItem("ctc_mission_auth_token")
-      this.http.patch(environment.baseApiUrl+'/user',{...this.validateForm.value},{headers:{
+      this.http.patch(url,{...this.validateForm.value},{headers:{
         "Authorization" : "bearer "+token,
         }}).subscribe(
         responseData=>{

@@ -19,10 +19,13 @@ export class FormationComponent implements OnInit {
       console.log('submit', this.validateForm.value);
       const dummyCourse = {
         ...this.validateForm.value,
-        instructedBy:"1",
-        plannedBy:"1"
+
       }
-      this.http.post( environment.baseApiUrl+'/courses/',dummyCourse).subscribe(
+      const token = localStorage.getItem("ctc_mission_auth_token")
+
+      this.http.post( environment.baseApiUrl+'/courses/',dummyCourse , {headers:{
+          "Authorization" : "bearer "+token,
+        }}).subscribe(
         responseData=>{console.log(responseData);}
       );
     } else {
