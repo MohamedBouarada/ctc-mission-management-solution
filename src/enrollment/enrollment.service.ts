@@ -150,6 +150,44 @@ export class EnrollmentService {
     throw new NotFoundException(`enrollment with id ${id} does not exist`);
   }
 
+  async getCancelDetails(id: number) {
+    const enrollment = await this.enrollmentRepository.findOne({
+      where: { id },
+    });
+
+    if (enrollment) {
+      if (enrollment.state == statesEnum.canceled) {
+        throw new BadRequestException('enrollment already canceled');
+      }
+      const courseDate = new Date(enrollment.course.startDate);
+      const before2weeks = new Date(
+        courseDate.setDate(courseDate.getDate() - 7),
+      );
+      if (
+        enrollment.state == statesEnum.inProgress ||
+        new Date(Date.now()) < before2weeks
+      ) {
+        return { msg: 'you can cancel your inscription with 0 DT penalty' };
+      }
+    } else {
+      const courseDate2 = new Date(enrollment.course.startDate);
+      const before2days = new Date(
+        courseDate2.setDate(courseDate2.getDate() - 2),
+      );
+      if (new Date(Date.now()) < before2days) {
+        const penalty = enrollment.course.price / 4;
+        enrollment.penalization = penalty;
+        return {
+          msg: ` you can cancel your inscription with ${penalty} DT as a penalty`,
+        };
+      } else {
+        return { msg: 'sorry , you cant cancel your enrollment' };
+      }
+    }
+
+    return { msg: '' };
+  }
+
   async cancelEnrollment(id: number) {
     const enrollment = await this.enrollmentRepository.findOne({
       where: { id },

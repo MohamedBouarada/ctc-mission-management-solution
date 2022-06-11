@@ -22,8 +22,7 @@ export class EnrollmentController {
   @Post()
   async create(
     @Body() createEnrollmentDto: CreateEnrollmentDto,
-  ): Promise<Enrollment>
-  {
+  ): Promise<Enrollment> {
     return await this.enrollmentService.create(createEnrollmentDto);
   }
 
@@ -36,13 +35,15 @@ export class EnrollmentController {
   async findOne(@Param('id') id: number): Promise<Enrollment> {
     return await this.enrollmentService.findOne(id);
   }
-  @Get('/:offset/:take')
+  /*@Get('/:offset/:take')
   async findAllPaginated(
     @Param('offset') offset: number,
     @Param('take') take: number,
   ): Promise<Enrollment[]> {
     return await this.enrollmentService.findAllPaginated(offset, take);
   }
+
+   */
 
   @Patch(':id')
   async update(
@@ -69,5 +70,9 @@ export class EnrollmentController {
   @Patch('/confirm/:id')
   async confirmEnrollment(@Param('id') id: number) {
     return await this.enrollmentService.confirmEnrollment(id);
+  }
+  @Get('/penalty/:id')
+  async getPenalty(@Param('id') id: number) {
+    return await this.enrollmentService.getCancelDetails(id);
   }
 }
