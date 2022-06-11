@@ -34,6 +34,7 @@ import { DashboardClientModule } from './pages/dashboard-client/dashboard-client
 
 import { AdminModule } from './admin/admin.module';
 import {PlanningModule} from "./planning/planning.module";
+import { PresSignupComponent } from './components/pres-signup/pres-signup.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -52,6 +53,7 @@ registerLocaleData(en);
         SignupOrganismComponent,
 SignupInstructorComponent,
         FormationComponent,
+        PresSignupComponent,
 
 
     ],

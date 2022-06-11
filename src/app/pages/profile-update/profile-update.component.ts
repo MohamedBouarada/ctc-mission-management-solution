@@ -65,6 +65,7 @@ const token = localStorage.getItem("ctc_mission_auth_token")
         error=>{
           console.log(error);
           this.errorMessage=error.error.message;
+          this.successMessage=false;
           console.log(this.errorMessage);}
       );
     } else {
@@ -93,7 +94,7 @@ const token = localStorage.getItem("ctc_mission_auth_token")
       }}).subscribe(
       responseData => {
         console.log(responseData);
-        this.successMessage = true;
+        //this.successMessage = true;
         this.validateForm = new FormGroup({
           firstName: new FormControl(responseData['firstName']),
           lastName: new FormControl(responseData['lastName']),

@@ -10,6 +10,7 @@ import { SignupInstructorComponent } from './pages/signup-instructor/signup-inst
 import { DashboardComponent } from './pages/dashboard-client/dashboard/dashboard.component';
 import {CourseDetailsComponent} from "./admin/course-details/course-details.component";
 import {CourseEnrollConfirmationComponent} from "./admin/course-enroll-confirmation/course-enroll-confirmation.component";
+import {PresSignupComponent} from "./components/pres-signup/pres-signup.component";
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'dashboard-client', component: DashboardComponent },
   {path:"course-details/:id" , component:CourseDetailsComponent},
   {path:"course-enroll/:courseId" , component:CourseEnrollConfirmationComponent},
-  {path:"enroll-details/:id/:enrollmentId" , component:CourseDetailsComponent}
+  {path:"enroll-details/:id/:enrollmentId" , component:CourseDetailsComponent},
+  {path:"pre-signup" , component:PresSignupComponent}
 ];
 
 @NgModule({
