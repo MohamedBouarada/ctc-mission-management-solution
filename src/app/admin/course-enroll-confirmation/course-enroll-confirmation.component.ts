@@ -52,12 +52,16 @@ export class CourseEnrollConfirmationComponent implements OnInit {
 
   enrollOne(){
     const enrollment = {
-      user :2,
       state :"inProgress",
       size:1,
       course :this.courseId,
     }
-    this.http.post(environment.baseApiUrl +"/enrollment",enrollment).subscribe((response)=>console.log(response))
+    const token = localStorage.getItem("ctc_mission_auth_token")
+
+    this.http.post(environment.baseApiUrl +"/enrollment",enrollment,{headers:{
+        "Authorization" : "bearer "+token
+
+      }}).subscribe((response)=>console.log(response))
   }
 
   addField(e?: MouseEvent): void {
@@ -116,13 +120,16 @@ export class CourseEnrollConfirmationComponent implements OnInit {
 
       }
       const enrollment = {
-        user :1,
         course: this.courseId,
         extraInformations:newArr,
         state:"inProgress",
         size:newArr.length
       }
-      this.http.post(environment.baseApiUrl+"/enrollment"  ,enrollment).subscribe((response)=>console.log(response))
+      const token = localStorage.getItem("ctc_mission_auth_token")
+
+      this.http.post(environment.baseApiUrl+"/enrollment"  ,enrollment,{headers:{
+          "Authorization" : "bearer "+token
+        }}).subscribe((response)=>console.log(response))
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
