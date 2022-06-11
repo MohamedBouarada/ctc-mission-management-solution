@@ -33,7 +33,9 @@
 
             </div>
           <div *ngIf="authUser.enrolled.length>0">
-            <div class="card-container"  *ngFor="let enroll of authUser.enrolled">
+            <div class="card-container"  >
+              <div *ngFor="let enroll of authUser.enrolled">
+
               <app-enrolled-courses [description]=" 'inscription state : \t' +enroll.state"
                                     [endDate]="enroll.course.endDate"
                                     [startDate]="enroll.course.startDate"
@@ -45,6 +47,7 @@
                                     [enrollmentId]="enroll.id"
 
               ></app-enrolled-courses>
+            </div>
 
             </div>
           </div>

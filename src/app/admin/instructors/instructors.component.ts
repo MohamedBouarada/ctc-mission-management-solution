@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IUsers} from "../users/usersInterface";
 import {map} from "rxjs/operators";
 import {InstructorsTableService} from "./instructors-table.service";
@@ -14,6 +14,10 @@ export class InstructorsComponent implements OnInit {
   i = 0;
   editId: string | null = null;
   listOfData: IInstructor[] = [];
+   showUserDetails: string="";
+   isShowUser: boolean=false;
+  @Input() adminContext=false
+
   constructor( private instructorService : InstructorsTableService) { }
   addRow(): void {
 
@@ -35,5 +39,13 @@ export class InstructorsComponent implements OnInit {
       }
     );
   }
+  doNotShowUserDetails(){
+    this.isShowUser=false
+  }
 
+  showUserInfos(id:number) {
+    console.log(id)
+    this.showUserDetails=String(id);
+    this.isShowUser=true
+  }
 }
