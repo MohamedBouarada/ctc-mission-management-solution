@@ -34,8 +34,9 @@
   align-items: center;
 }
 .backText{
-  
-  font-size: 2rem; font-weight: 600; color: black;
+  font-family: "Lucida Handwriting", Times, Cursive;
+  font-size: 2.2rem; font-weight: 600; color: #ffae00;
+  margin-bottom: 20%;
 }
 .container {
   display: flex;
@@ -45,7 +46,7 @@
 .leftSide {
   position: relative;
   align-items: center;
-  margin-top: 5%;
+  //margin-top: 5%;
 
   width: 30%;
 }
