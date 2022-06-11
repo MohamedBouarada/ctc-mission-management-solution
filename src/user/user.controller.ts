@@ -41,7 +41,8 @@ export class UserController {
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDtoAll,
   ): Promise<User> {
-    return this.userService.updateUser(req.user.authId, updateUserDto);
+    const searchId = id ? id : req.user.authId;
+    return this.userService.updateUser(searchId, updateUserDto);
     // return this.userService.updateUser(id, updateUserDto);
   }
   @Patch('/password/:id')
