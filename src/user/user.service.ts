@@ -45,7 +45,7 @@ export class UserService {
       ? findOptions.sort === 'ASC'
         ? 'ASC'
         : 'DESC'
-      : 'ASC';
+      : 'DESC';
     const page = findOptions.page ? findOptions.page : 1;
     const perPage = findOptions.perPage ? findOptions.perPage : 10;
 
