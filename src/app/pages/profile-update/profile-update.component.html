@@ -65,7 +65,7 @@
                     type="text"
                     nz-input
                     formControlName="firstName"
-                    placeholder="Mohamed"
+                    placeholder="First Name"
                     class="inputText"
                   />
                 </nz-input-group>
@@ -79,7 +79,7 @@
                     type="text"
                     nz-input
                     formControlName="lastName"
-                    placeholder="Bouarada"
+                    placeholder="Last Name"
                     class="inputText"
                   />
                 </nz-input-group>
@@ -94,7 +94,7 @@
                   type="text"
                   nz-input
                   formControlName="email"
-                  placeholder="mohamed@gmail.com"
+                  placeholder="Email"
                   class="inputText"
                 />
               </nz-input-group>
@@ -127,7 +127,7 @@
             <div *ngIf="successMessage">
             <nz-alert
               nzType="success"
-              nzMessage="Sign Up successfully completed"
+              nzMessage="Profile successfully updated"
             ></nz-alert>
           </div>
           <div *ngIf="errorMessage">
@@ -205,6 +205,11 @@
   </div>
 
   <div *ngIf="authUser.instructor.courses.length>0">
+    <div class="titleContainer">
+      Course To Teach
+
+  </div>
+    
     <div class="card-container" *ngFor="let course of authUser.instructor.courses">
       <app-enrolled-courses [description]="course.preview"
                             [endDate]="course.endDate"
@@ -219,7 +224,10 @@
 
   <div *ngIf="adminContext">
     <div *ngIf="authUser.enrolled.length>0" class="card-container">
-
+      <div class="titleContainer">
+       Enrolled courses
+  
+    </div>
       <div *ngFor="let enroll of authUser.enrolled">
       <app-enrolled-courses [description]=" 'inscription state : \t' +enroll.state"
                             [endDate]="enroll.course.endDate"

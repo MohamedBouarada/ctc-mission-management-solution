@@ -167,8 +167,12 @@
           </tbody>
         </nz-table>
       </div>
+
       <div>
         <div class="cancelButtonContainer">
+          <div>
+            <app-button text="CONFIRM ENROLLMENT" (click)="confirmEnrollment()"></app-button>
+          </div>
           <button
           nz-button
           class="cancelButton"
@@ -177,7 +181,7 @@
         >
           Cancel Enrollment
         </button>
-  
+
         </div>
         <!-- <app-button
           text="CANCEL ENROLLMENT"
@@ -189,3 +193,4 @@
 </div>
 
 </div>
+

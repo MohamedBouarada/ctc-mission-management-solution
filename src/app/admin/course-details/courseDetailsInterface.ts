@@ -52,3 +52,8 @@ export interface IEnrollment {
   penalization:string,
   extraInformations : {fullName:string,email:string} [],
 }
+
+
+export interface IPenalty {
+  msg:string,
+}

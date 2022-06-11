@@ -32,6 +32,19 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the Course name">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="mainImage"
+              placeholder="Course image"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
         <nz-form-control nzErrorTip="Please enter the start date ">
           <nz-input-group>
             <input
@@ -88,6 +101,18 @@
               nz-input
               formControlName="capacity"
               placeholder="capacity "
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the course capacity">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="placesAvailable"
+              placeholder="places Available "
             />
           </nz-input-group>
         </nz-form-control>

@@ -8,9 +8,9 @@
   >
     Go Back
   </button>
-  <button nz-button class="addButton" nzType="primary" *ngIf="!isShowUser">
+  <a nz-button class="addButton" nzType="primary" *ngIf="!isShowUser" href="/signup-user">
     Add user
-  </button>
+  </a>
   <br />
   <br />
   <nz-table #editRowTable nzBordered [nzData]="listOfData" *ngIf="!isShowUser">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CourseDetailsServiceService} from "./course-details-service.service";
 import {map} from "rxjs/operators";
-import {ICourseDetails, IEnrollment} from "./courseDetailsInterface";
+import {ICourseDetails, IEnrollment, IPenalty} from "./courseDetailsInterface";
 import {ActivatedRoute} from "@angular/router";
 import {DatePipe} from "@angular/common";
 
@@ -67,6 +67,7 @@ export class CourseDetailsComponent implements OnInit {
      penalization:"",
      extraInformations :  [],
    }
+  penaltyMessage: Object =""
 
   constructor( private courseDetailsService:CourseDetailsServiceService,private route:ActivatedRoute,private datePipe:DatePipe) { }
 
@@ -94,11 +95,28 @@ export class CourseDetailsComponent implements OnInit {
       )).subscribe(
         enroll =>this.enrollDetails = enroll,
       )
+      this.courseDetailsService.getEnrollPenalty(this.enrollmentId).pipe(map(
+        res=>{console.log(res);return res}
+      )).subscribe(res=>this.penaltyMessage=res.msg)
+
     }
   }
 
   cancelEnrollment(){
+    this.courseDetailsService.cancelEnrollment(this.enrollmentId).pipe(map(
+      res=>res,
+    )).subscribe(res=>console.log(res))
+  }
 
+  confirmEnrollment(){
+     this.courseDetailsService.confirmEnrollment(this.enrollmentId).pipe(map(
+       res=>res,
+     )).subscribe(res=>console.log(res))
+  }
+  getEnrollPenalty(){
+ this.courseDetailsService.getEnrollPenalty(this.enrollmentId).pipe(map(
+   res=>res
+ )).subscribe(res=>this.penaltyMessage=String(res))
   }
 
 }
