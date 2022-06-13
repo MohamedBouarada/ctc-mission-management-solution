@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import {environment} from "../../../environments/environment";
 
 @Component({
@@ -22,7 +22,7 @@ export class CourseEnrollConfirmationComponent implements OnInit {
   courseId : string|null = ""
   listOfControl: Array<{ id: number; controlInstance: string ; controlEmail:string }> = [];
 
-  constructor(private fb: FormBuilder, private http:HttpClient,private route:ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private http:HttpClient,private route:ActivatedRoute ,private router:Router) { }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId');
@@ -62,6 +62,8 @@ export class CourseEnrollConfirmationComponent implements OnInit {
         "Authorization" : "bearer "+token
 
       }}).subscribe((response)=>console.log(response))
+      this.router.navigate(['/dashboard-client'])
+
   }
 
   addField(e?: MouseEvent): void {

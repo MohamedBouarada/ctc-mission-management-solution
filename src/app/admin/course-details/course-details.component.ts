@@ -67,7 +67,7 @@ export class CourseDetailsComponent implements OnInit {
      penalization:"",
      extraInformations :  [],
    }
-  penaltyMessage: Object =""
+  penaltyMessage: String =""
 
   constructor( private courseDetailsService:CourseDetailsServiceService,private route:ActivatedRoute,private datePipe:DatePipe) { }
 

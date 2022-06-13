@@ -149,7 +149,7 @@
   <div *ngIf=" enrollmentId && enrollmentId.length>0">
     <div class="tableTitle">Enrollment Details</div>
     <div class="stateContainer">Enrollment Status :  <span class="state">{{ enrollDetails.state }}</span> </div>
-    <div class="stateContainer">cancel penalty:  <span class="state">{{ penaltyMessage }}</span> </div>
+    <div class="stateContainer" *ngIf="penaltyMessage.length>0">cancel penalty:  <span class="state">{{ penaltyMessage }}</span> </div>
     <div *ngIf="enrollDetails.extraInformations &&enrollDetails.extraInformations.length > 0">
       <div class="tableContent">
         <h2>other users</h2>
