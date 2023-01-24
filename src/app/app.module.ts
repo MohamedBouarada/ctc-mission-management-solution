@@ -48,14 +48,11 @@ registerLocaleData(en);
     declarations: [
         AppComponent,
         LoginComponent,
-
         SignupUserComponent,
         SignupOrganismComponent,
-SignupInstructorComponent,
+        SignupInstructorComponent,
         FormationComponent,
         PresSignupComponent,
-
-
     ],
 
   imports: [

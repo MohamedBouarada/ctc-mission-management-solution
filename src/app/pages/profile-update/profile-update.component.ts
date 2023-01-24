@@ -85,7 +85,7 @@ const token = localStorage.getItem("ctc_mission_auth_token")
 
     //changer validateForm par editForm in html pour le form 1 et par editFormPassword pour le form 2
     console.log(this.userId)
-const token = localStorage.getItem("ctc_mission_auth_token")
+    const token = localStorage.getItem("ctc_mission_auth_token")
     const url =String( this.userId).length>0? environment.baseApiUrl+ '/user/one/'+ this.userId : environment.baseApiUrl+'/user/one';
     console.log(url)
     console.log( typeof this.userId)
