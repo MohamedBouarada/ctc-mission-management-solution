@@ -1,0 +1,148 @@
+<div class="bg">
+  <div class="container">
+    <img
+      nz-image
+      width="200px"
+      height="100px"
+      nzSrc="/assets/Images/medsirat.png"
+      alt=""
+      class="logo"
+    />
+    <form
+      nz-form
+      [formGroup]="validateForm"
+      class="AddCourse-form"
+      (ngSubmit)="submitForm()"
+    >
+      <div class="AddCourse-form__header">
+        <h1>Add Course</h1>
+        Please fill the form to specify the details of the course
+      </div>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the Course name">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="name"
+              placeholder="Course name"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the Course name">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="mainImage"
+              placeholder="Course image"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the start date ">
+          <nz-input-group>
+            <input
+              type="datetime-local"
+              nz-input
+              formControlName="startDate"
+              placeholder="start date "
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the end date ">
+          <nz-input-group>
+            <input
+              type="datetime-local"
+              nz-input
+              formControlName="endDate"
+              placeholder="end date "
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the course address">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="address"
+              placeholder="address"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the course price">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="price"
+              placeholder="price "
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the course capacity">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="capacity"
+              placeholder="capacity "
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the course capacity">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="placesAvailable"
+              placeholder="places Available "
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the Course description">
+          <nz-input-group>
+            <textarea
+              type="text"
+              nz-input
+              formControlName="description"
+              placeholder=" description"></textarea>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your nature!">
+          <nz-select
+            id="nature"
+            formControlName="instructedBy"
+            nzPlaceHolder="Instructor">
+            <nz-option *ngFor=" let i of instructorsAvailable" nzValue='{{i.id}}' nzLabel='{{i.user.firstName}} {{i.user.lastName}}'></nz-option>
+
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div nz-row class="AddCourse-form-margin"></div>
+      <br />
+      <app-button [text]="textl" (click)="AddCourse()"></app-button>
+    </form>
+  </div>
+</div>
